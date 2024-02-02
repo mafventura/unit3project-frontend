@@ -1,8 +1,14 @@
+import { useState } from "react";
+import { Routes, Route } from 'react-router-dom'
+import AuthPage from "./Components/AuthPage";
+
 
 function App() {
+  const [user, setUser] = useState('evy')
+
   return (
     <div>
-      APP
+      <AuthPage user={user} />
     </div>
   );
 }
