@@ -23,8 +23,9 @@ function App() {
 
   return (
     <div>
-      <h1>Hey There</h1>
-      <AuthPage user={user} />
+      <AuthPage  />
+
+ 
       <Sidebar />
       <Button variant="primary" onClick={handleShow}>
         Open Modal
