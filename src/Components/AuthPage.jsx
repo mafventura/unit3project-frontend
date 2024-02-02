@@ -4,7 +4,7 @@ import axios from "axios"
 import { useState } from 'react'
 
 
-export default function AuthPage({user}) {
+export default function AuthPage() {
     const [user, setUser] = useState('')
 
     async function googleResponse(response) {
@@ -24,19 +24,3 @@ export default function AuthPage({user}) {
     </div>
   )
 }
-
-
-// async function callback(response) {
-//     try {
-//         isLoggedIn.value = true
-
-//         const user = decodeCredential(response.credential)
-//         userName = user.given_name
-//         cookies.set('user_session', response.credential)
-//         await axios.post(`${import.meta.env.VITE_API_URL}/users/add`)
-//         console.log('session saved');
-        
-//     } catch (error) {
-//         console.error('Error saving session:', error)
-//     }
-// }

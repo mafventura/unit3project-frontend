@@ -11,17 +11,17 @@ import { NavLink } from 'react-router-dom'
 export default function Sidebar() {
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
-      <CDBSidebar textColor="#fff" backgroundColor="#C1CC9C">
+      <CDBSidebar textColor="#fff" backgroundColor="#3C7D54">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
-            Journey
+            JOURNEY
           </a>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink>
-              <CDBSidebarMenuItem icon="calendar-plus">Quick Daily</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="calendar-plus">All Daily's</CDBSidebarMenuItem>
             </NavLink>
             <NavLink>
               <CDBSidebarMenuItem icon="calendar-check">To Do's</CDBSidebarMenuItem>
