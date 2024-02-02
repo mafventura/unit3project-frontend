@@ -1,11 +1,3 @@
-import React from 'react'
-
-export default function Sidebar() {
-  return (
-    <div>Sidebar</div>
-  )
-}
-
 import {
   CDBSidebar,
   CDBSidebarContent,
@@ -14,7 +6,7 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 export default function Sidebar() {
   return (
