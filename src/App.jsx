@@ -10,7 +10,7 @@ function App() {
 
   return (
     <div>
-      <AuthPage user={user} />
+      <AuthPage  />
       <Sidebar />
     </div>
   );
