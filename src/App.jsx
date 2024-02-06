@@ -150,6 +150,7 @@ function App() {
       <Quicks
         showModal={quicksModal}
         handleClose={() => handleCloseModal(setQuicksModal)}
+        user={user}
       />
       <ToDoList
         showModal={todoModal}
