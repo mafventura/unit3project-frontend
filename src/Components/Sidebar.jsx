@@ -7,8 +7,9 @@ import {
   CDBSidebarMenuItem,
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
-export default function Sidebar() {
+export default function Sidebar({ handleLogout, user }) {
   return (
     <div style={{ display: 'flex', height: '100vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#3C7D54">
@@ -16,6 +17,13 @@ export default function Sidebar() {
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
             JOURNEY
           </a>
+          <p style={{
+            color: 'rgb(233,237,200,0.7)',
+            margin: '5px 0 0',
+            fontFamily: 'fantasy'
+            }}>
+              Hello, {user.given_name}
+          </p>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
@@ -31,14 +39,20 @@ export default function Sidebar() {
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
-
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
           <div
             className="sidebar-btn-wrapper"
-            style={{
-              padding: '20px 5px',
-            }}
+            
           >
+            <Button variant="secondary" onClick={handleLogout} 
+              style={{
+                width: '100%',
+                background: 'rgb(233, 237, 200, 0.2)',
+                border: 'none',
+                borderRadius: '0'
+            }}>
+              logout
+            </Button>
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
