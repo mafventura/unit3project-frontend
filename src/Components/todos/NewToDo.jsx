@@ -1,6 +1,7 @@
+import axios from "axios";
 import { useState } from "react";
 
-export default function NewToDoForm({ addToDo, user }) {
+export default function NewToDoForm({ onAddToDo, user }) {
   const [newToDo, setNewToDo] = useState({
     todo: "",
     completed: false,
@@ -15,28 +16,25 @@ export default function NewToDoForm({ addToDo, user }) {
   }
 
   async function handleAddToDo(e) {
-    e.preventDefault();
-    addToDo(newToDo);
-    console.log(newToDo, `${process.env.REACT_APP_BACKEND_URL}/todos/add`);
+    e.preventDefault()
     try {
-      const response = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/todos/add`,
-        {
-          method: "POST",
-          headers: {
-            "user-email": user.email,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(newToDo),
-        }
-      );
-      console.log(response);
-      setNewToDo({
-        todo: "",
-        completed: false,
-      });
+        await axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/todos/add`,
+            newToDo,
+            {
+                headers: {
+                "user-email": user.email,
+                "Content-Type": "application/json",
+                },
+            }
+        )
+        setNewToDo({
+            todo: "",
+            completed: false,
+          });
+        onAddToDo();
     } catch (e) {
-      console.error(e);
+        console.error(e)
     }
   }
 
