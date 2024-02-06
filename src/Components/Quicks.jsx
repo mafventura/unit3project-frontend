@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
-import { Modal, Button, Tab, Tabs, Form } from 'react-bootstrap'
+import React, { useState, useEffect } from 'react'
+import { Modal, Button, Form } from 'react-bootstrap'
 import { BsDroplet } from 'react-icons/bs'
-import { FaRegMoon } from 'react-icons/fa'  
+import { FaRegMoon } from 'react-icons/fa' 
+import axios from 'axios' 
 
 
 const Quicks = ({ showModal, handleClose }) => {
   const [activeTab, setActiveTab] = useState('hydration')
   const [hydrationLevel, setHydrationLevel] = useState(1) // 1 to 4 indicating hydration level
   const [mood, setMood] = useState('')
-  const [sleepLevel, setSleepLevel] = useState(1) // 1 to 4 indicating sleep level
+  const [sleepLevel, setSleepLevel] = useState(0) // 1 to 4 indicating sleep level
   const [quote, setQuote] = useState('')
 
   const handleTabSelect = (selectedTab) => {
@@ -31,11 +32,45 @@ const Quicks = ({ showModal, handleClose }) => {
     setQuote(event.target.value);
   }
 
-  const handleSubmit = () => {
-    // Handle the submission logic here
-    // You can gather the state of each category and save it
-    handleClose();
+  const handleSubmit = async () => {
+    try {
+      // Make a POST request to backend endpoint
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/dailies`, {
+        water: hydrationLevel,
+        mood,
+        sleep: sleepLevel,
+        quote,
+        userId: 'Users-id', // Replace with the actual user ID
+      });
+  
+      console.log('Response from server:', response.data)
+   
+      handleClose(); // Close the modal or perform any other actions on success
+    } catch (error) {
+      console.error('Error sending data to server:', error);
+      // Handle errors or provide user feedback
+    }
   }
+  
+  useEffect(() => {
+    // Load saved state from localStorage on component mount
+    const savedState = JSON.parse(localStorage.getItem('quicksState')) || {}
+    setHydrationLevel(savedState.hydrationLevel || 1)
+    setMood(savedState.mood || '')
+    setSleepLevel(savedState.sleepLevel || 1)
+    setQuote(savedState.quote || '')
+  }, [])
+
+  useEffect(() => {
+    // Save state to localStorage whenever it changes
+    const stateToSave = {
+      hydrationLevel,
+      mood,
+      sleepLevel,
+      quote,
+    }
+    localStorage.setItem('quicksState', JSON.stringify(stateToSave))
+  }, [hydrationLevel, mood, sleepLevel, quote])
 
   return (
     <Modal show={showModal} onHide={handleClose}>
