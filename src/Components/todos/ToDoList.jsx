@@ -52,7 +52,7 @@ const ToDoList = ({
       </Modal.Header>
 
       <Modal.Body>
-        {toDoListItems}
+        {/* {toDoListItems} */}
         <NewToDoForm onAddToDo={fetchData} todo={todos} user={user} />
       </Modal.Body>
 
