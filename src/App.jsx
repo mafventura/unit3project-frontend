@@ -11,6 +11,7 @@ import Sidebar from "./Components/Sidebar";
 import AllToDos from "./Components/todos/AllToDos";
 import "./App.css";
 import Home from "./Home";
+import AllDailies from "./Components/Dailies/AllDailies";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -19,6 +20,15 @@ function App() {
       todo: '',
       completed: false,
     },
+  ])
+
+  const [quicks, setQuicks] = useState([
+    {
+      water: 1,
+      mood: "",
+      sleep: 1,
+      quote: ""
+    }
   ])
 
   async function getUser() {
@@ -59,6 +69,27 @@ function App() {
       console.error(e);
     }
   }, [user]);
+
+  const fetchQuicksData = useCallback(async () => {
+    try {
+      console.log("this is", user)
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/dailies`,
+        {
+          headers: {
+            "user-email": user.email,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = response.data;
+      setQuicks(result);
+      console.log(quicks)
+    } catch (e) {
+      console.error(e);
+    }
+  }, [user]);
+
   return (
     <>
       {user ? (
@@ -66,9 +97,10 @@ function App() {
           <Sidebar user={user} handleLogout={handleLogout} />
           <Routes>
             <Route path="/todos" element={<AllToDos fetchData={fetchData} todos={todos} />} />
+            <Route path="/dailies" element={<AllDailies fetchQuicksData={fetchQuicksData} quicks={quicks} />} />
             <Route
               path="/"
-              element={<Home user={user} setUser={setUser} getUser={getUser} fetchData={fetchData} todos={todos} setTodos={setTodos} />}
+              element={<Home user={user} setUser={setUser} getUser={getUser} fetchData={fetchData} todos={todos} setTodos={setTodos} quicks={quicks} setQuicks={setQuicks} fetchQuicksData={fetchQuicksData}/>}
             />
           </Routes>
         </div>

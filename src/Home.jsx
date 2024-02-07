@@ -11,16 +11,8 @@ import Sidebar from "./Components/Sidebar";
 import DisplayDaily from "./Components/Dailies/DisplayDaily";
 import "./App.css";
 
-export default function Home({user, setUser, getUser, todos, setTodos, fetchData}) {
+export default function Home({user, setUser, getUser, todos, setTodos, fetchData, quicks, setQuicks, fetchQuicksData}) {
     const [quicksModal, setQuicksModal] = useState(false);
-    const [quicks, setQuicks] = useState([
-      {
-        water: 1,
-        mood: "",
-        sleep: 1,
-        quote: ""
-      }
-    ])
     const [todoModal, setTodoModal] = useState(false);
     const [scheduleModal, setScheduleModal] = useState(false);
   
@@ -49,25 +41,7 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
       }
     }, [user]);
   
-    const fetchQuicksData = useCallback(async () => {
-      try {
-        console.log("this is", user)
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/dailies`,
-          {
-            headers: {
-              "user-email": user.email,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const result = response.data;
-        setQuicks(result);
-        console.log(quicks)
-      } catch (e) {
-        console.error(e);
-      }
-    }, [user]);
+    
   
     useEffect(() => {
       if (user?.email) {
