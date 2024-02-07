@@ -15,6 +15,7 @@ function App() {
   const [quicksModal, setQuicksModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
   const [scheduleModal, setScheduleModal] = useState(false);
+  const [quicks, setQuicks] = useState([]);
   const [todos, setTodos] = useState([
     {
       todo: "",
@@ -67,6 +68,30 @@ function App() {
       setTodos(result);
     } catch (e) {
       console.error(e);
+    }
+  }, [user]);
+
+  const fetchQuicksData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/dailies/your-user-id`,
+        {
+          headers: {
+            "user-email": user.email,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = response.data;
+      setQuicks(result);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [user]);
+
+  useEffect(() => {
+    if (user?.email) {
+      fetchQuicksData();
     }
   }, [user]);
 
