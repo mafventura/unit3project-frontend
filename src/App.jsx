@@ -8,7 +8,6 @@ import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/Schedule";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
-import AllToDos from "./Components/todos/AllToDos";
 import "./App.css";
 
 function App() {

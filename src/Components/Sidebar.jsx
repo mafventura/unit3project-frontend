@@ -24,7 +24,7 @@ export default function Sidebar({ handleLogout, user }) {
             margin: '5px 0 0',
             fontFamily: 'fantasy'
             }}>
-              Hello, {user.given_name}
+              Hello, {user?.given_name}
           </p>
         </CDBSidebarHeader>
 
