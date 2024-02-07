@@ -5,7 +5,7 @@ import axios from "axios";
 import AuthPage from "./Components/AuthPage";
 import Quicks from "./Components/Quicks";
 import ToDoList from "./Components/todos/ToDoList";
-import Schedule from "./Components/Schedule";
+import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
 import "./App.css";
