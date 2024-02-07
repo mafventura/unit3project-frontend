@@ -10,7 +10,7 @@ import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
 import "./App.css";
 
-export default function Home({user, setUser, getUser}) {
+export default function Home({user, setUser, getUser, fetchData}) {
     const [quicksModal, setQuicksModal] = useState(false);
     const [todoModal, setTodoModal] = useState(false);
     const [scheduleModal, setScheduleModal] = useState(false);
@@ -38,25 +38,7 @@ export default function Home({user, setUser, getUser}) {
       setTodos(updatedTodos);
     }
   
-    const fetchData = useCallback(async () => {
-      console.log("fetching");
-      try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_BACKEND_URL}/todos`,
-          {
-            headers: {
-              "user-email": user.email,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        const result = response.data;
-        setTodos(result);
-        console.log(result)
-      } catch (e) {
-        console.error(e);
-      }
-    }, [user]);
+  
   
     // useEffect(() => {
     //   getUser();

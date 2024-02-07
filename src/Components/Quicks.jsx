@@ -49,7 +49,7 @@ const Quicks = ({ showModal, handleClose, user }) => {
         },
     }
     )
-  
+
       console.log('Response from server:', response.data)
    
       handleClose(); // Close the modal or perform any other actions on success

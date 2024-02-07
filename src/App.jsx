@@ -34,16 +34,36 @@ function App() {
     getUser();
   }, []);
 
+  const fetchData = useCallback(async () => {
+    console.log("fetching");
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/todos`,
+        {
+          headers: {
+            "user-email": user.email,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = response.data;
+      setTodos(result);
+      console.log(result)
+    } catch (e) {
+      console.error(e);
+    }
+  }, [user]);
+
   return (
     <>
       {user ? (
         <div className="d-flex">
           <Sidebar user={user} handleLogout={handleLogout} />
           <Routes>
-            <Route path="/todos" element={<AllToDos />} />
+            <Route path="/todos" element={<AllToDos fetchData={fetchData} />} />
             <Route
               path="/"
-              element={<Home user={user} setUser={setUser} getUser={getUser} />}
+              element={<Home user={user} setUser={setUser} getUser={getUser} fetchData={fetchData} />}
             />
           </Routes>
         </div>
