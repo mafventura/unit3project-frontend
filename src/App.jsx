@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 import AuthPage from "./Components/AuthPage";
-import Quicks from "./Components/Quicks";
+import Quicks from "./Components/Dailies/Quicks";
 import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
@@ -59,7 +59,6 @@ function App() {
       console.error(e);
     }
   }, [user]);
-  
   return (
     <>
       {user ? (

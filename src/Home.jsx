@@ -3,15 +3,24 @@ import { Routes, Route } from "react-router-dom";
 import { Button, Container } from "react-bootstrap";
 import axios from "axios";
 import AuthPage from "./Components/AuthPage";
-import Quicks from "./Components/Quicks";
+import Quicks from "./Components/Dailies/Quicks";
 import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
+import DisplayDaily from "./Components/Dailies/DisplayDaily";
 import "./App.css";
 
 export default function Home({user, setUser, getUser, todos, setTodos, fetchData}) {
     const [quicksModal, setQuicksModal] = useState(false);
+    const [quicks, setQuicks] = useState([
+      {
+        water: 1,
+        mood: "",
+        sleep: 1,
+        quote: ""
+      }
+    ])
     const [todoModal, setTodoModal] = useState(false);
     const [scheduleModal, setScheduleModal] = useState(false);
   
@@ -40,6 +49,32 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
       }
     }, [user]);
   
+    const fetchQuicksData = useCallback(async () => {
+      try {
+        console.log("this is", user)
+        const response = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/dailies`,
+          {
+            headers: {
+              "user-email": user.email,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const result = response.data;
+        setQuicks(result);
+        console.log(quicks)
+      } catch (e) {
+        console.error(e);
+      }
+    }, [user]);
+  
+    useEffect(() => {
+      if (user?.email) {
+        fetchQuicksData();
+      }
+    }, [user]);
+
     return (
       <div>
        <h1>Hello</h1>
@@ -88,11 +123,16 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
                   fetchData={fetchData}
                   deleteCompletedTodo={deleteCompletedTodo}
                 />
+                <DisplayDaily fetchQuicksData={fetchQuicksData} quicks={quicks}/>
+                
+
               </Container>
             </Container>
         <Quicks
           showModal={quicksModal}
           handleClose={() => handleCloseModal(setQuicksModal)}
+          user={user}
+          fetchQuicksData={fetchQuicksData}
         />
         <ToDoList
           showModal={todoModal}

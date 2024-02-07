@@ -5,7 +5,7 @@ import { FaRegMoon } from 'react-icons/fa'
 import axios from 'axios' 
 
 
-const Quicks = ({ showModal, handleClose, user }) => {
+const Quicks = ({ showModal, handleClose, user, fetchQuicksData }) => {
   const [activeTab, setActiveTab] = useState('hydration')
   const [hydrationLevel, setHydrationLevel] = useState(1) // 1 to 4 indicating hydration level
   const [mood, setMood] = useState('')
@@ -41,17 +41,19 @@ const Quicks = ({ showModal, handleClose, user }) => {
         mood,
         sleep: sleepLevel,
         quote,
-        userId: 'Users-id', // Replace with the actual user ID
+        
       }, {
         headers: {
         "userEmail": user.email,
         "Content-Type": "application/json",
         },
     }
+   
     )
+    console.log(response)
   
       console.log('Response from server:', response.data)
-   
+      fetchQuicksData()
       handleClose(); // Close the modal or perform any other actions on success
     } catch (error) {
       console.error('Error sending data to server:', error)
@@ -170,7 +172,10 @@ const Quicks = ({ showModal, handleClose, user }) => {
   <Button variant="secondary" onClick={handleClose}>
     Close
   </Button>
-  <Button variant="primary" onClick={handleSubmit} style={{ backgroundColor: '#3a7e54', borderColor: '#3a7e54' }}>
+  <Button variant="primary" onClick={ () => {
+    handleSubmit()
+    fetchQuicksData()
+  }} style={{ backgroundColor: '#3a7e54', borderColor: '#3a7e54' }}>
     Save
   </Button>
 </Modal.Footer>
