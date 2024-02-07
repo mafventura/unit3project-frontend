@@ -78,18 +78,10 @@ function App() {
     }
   }, [user]);
 
-<<<<<<< HEAD
-  const fetchDataSchedule = useCallback(async () => {
-    console.log("fetching");
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/schedules`,
-=======
   const fetchQuicksData = useCallback(async () => {
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/dailies/your-user-id`,
->>>>>>> development
         {
           headers: {
             "user-email": user.email,
@@ -98,25 +90,18 @@ function App() {
         }
       );
       const result = response.data;
-<<<<<<< HEAD
-      setSchedules(result);
-=======
       setQuicks(result);
->>>>>>> development
     } catch (e) {
       console.error(e);
     }
   }, [user]);
 
-<<<<<<< HEAD
-=======
   useEffect(() => {
     if (user?.email) {
       fetchQuicksData();
     }
   }, [user]);
 
->>>>>>> development
   useEffect(() => {
     getUser();
   }, []);
@@ -125,7 +110,6 @@ function App() {
     if (user?.email) {
       // console.log("fet", user);
       fetchData();
-      fetchDataSchedule();
     }
   }, [user]);
 
@@ -214,7 +198,6 @@ function App() {
         handleClose={() => handleCloseModal(setScheduleModal)}
         schedules={schedules}
         setSchedules={setSchedules}
-        fetchDataSchedule={fetchDataSchedule}
       />
     </div>
   );
