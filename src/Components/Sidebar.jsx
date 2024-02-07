@@ -8,6 +8,8 @@ import {
 } from 'cdbreact';
 import { NavLink } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import AllToDos from './todos/AllToDos';
+import { Routes, Route } from 'react-router-dom'
 
 export default function Sidebar({ handleLogout, user }) {
   return (
@@ -31,7 +33,7 @@ export default function Sidebar({ handleLogout, user }) {
             <NavLink>
               <CDBSidebarMenuItem icon="calendar-plus">All Daily's</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink>
+            <NavLink to="/todos">
               <CDBSidebarMenuItem icon="calendar-check">To Do's</CDBSidebarMenuItem>
             </NavLink>
             <NavLink>

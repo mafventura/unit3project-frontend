@@ -10,7 +10,7 @@ const ToDoList = ({
   todos,
   setTodos,
   fetchData,
-  deleteCompletedTodo
+  deleteCompletedTodo,
 }) => {
   // function addToDo(todo) {
   //   setTodos([...todos, todo]);
