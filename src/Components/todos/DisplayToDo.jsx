@@ -2,7 +2,19 @@ import {InputGroup, Form, Button} from "react-bootstrap";
 import axios from "axios";
 
 export default function DisplayToDo({ todos, setTodos, fetchData, deleteCompletedTodo }) {
-//   console.log(todos);
+    //   console.log(todos);
+    const today = new Date();
+    const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    const todosFromToday = todos.filter(todo => {
+        // Convert createdAt string to Date todoect
+            const createdAtDate = new Date(todo.createdAt);
+            // Extract the date part from createdAt timestamp
+            const createdAtDateOnly = new Date(createdAtDate.getFullYear(), createdAtDate.getMonth(), createdAtDate.getDate());
+            // Check if createdAtDate is equal to today's date
+            return createdAtDateOnly.getTime() === todayDate.getTime();
+    });
+
   function handleCheckboxChange(index) {
     const updatedTodos = todos.map((todo, idx) => {
       if (idx === index) {
@@ -59,7 +71,7 @@ export default function DisplayToDo({ todos, setTodos, fetchData, deleteComplete
         maxWidth: "50%",
       }}
     >
-      {todos.map((todo, index) => (
+      {todosFromToday.map((todo, index) => (
         <InputGroup className="mb-3" key={index}>
           <InputGroup.Checkbox
             aria-label="Checkbox for following text input"

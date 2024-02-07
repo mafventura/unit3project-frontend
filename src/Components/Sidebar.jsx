@@ -30,6 +30,9 @@ export default function Sidebar({ handleLogout, user }) {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
+            <NavLink to='/'>
+              <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
+            </NavLink>
             <NavLink>
               <CDBSidebarMenuItem icon="calendar-plus">All Daily's</CDBSidebarMenuItem>
             </NavLink>
