@@ -1,11 +1,12 @@
-import React from 'react'
-import Sidebar from '../Sidebar'
+import React from "react";
+import { Container } from "react-bootstrap";
 
 export default function AllToDos() {
   return (
-    <div>
-        <Sidebar />
-        <h1>All To-Do's</h1>
+    <div className="d-flex">
+      <Container className="d-flex flex-column justify-content-center align-items-center">
+        Hello
+      </Container>
     </div>
-  )
+  );
 }

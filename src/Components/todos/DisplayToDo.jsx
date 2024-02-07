@@ -2,7 +2,7 @@ import {InputGroup, Form, Button} from "react-bootstrap";
 import axios from "axios";
 
 export default function DisplayToDo({ todos, setTodos, fetchData, deleteCompletedTodo }) {
-  console.log(todos);
+//   console.log(todos);
   function handleCheckboxChange(index) {
     const updatedTodos = todos.map((todo, idx) => {
       if (idx === index) {
