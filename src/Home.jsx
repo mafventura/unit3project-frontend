@@ -10,8 +10,7 @@ import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
 import "./App.css";
 
-export default function Home() {
-    const [user, setUser] = useState(null);
+export default function Home({user, setUser, getUser}) {
     const [quicksModal, setQuicksModal] = useState(false);
     const [todoModal, setTodoModal] = useState(false);
     const [scheduleModal, setScheduleModal] = useState(false);
@@ -29,21 +28,9 @@ export default function Home() {
     function handleCloseModal(modalType) {
       modalType(false);
     }
+
   
-    const handleLogout = async () => {
-      window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`, "_self");
-    };
-  
-    async function getUser() {
-      try {
-        const url = `${process.env.REACT_APP_BACKEND_URL}/auth/login/success`;
-        const { data } = await axios.get(url, { withCredentials: true });
-  
-        setUser(data?.user?._json);
-      } catch (e) {
-        console.error(e);
-      }
-    }
+
   
     function deleteCompletedTodo(index) {
       // console.log(index);
@@ -65,14 +52,15 @@ export default function Home() {
         );
         const result = response.data;
         setTodos(result);
+        console.log(result)
       } catch (e) {
         console.error(e);
       }
     }, [user]);
   
-    useEffect(() => {
-      getUser();
-    }, []);
+    // useEffect(() => {
+    //   getUser();
+    // }, []);
   
     useEffect(() => {
       if (user?.email) {
@@ -83,14 +71,13 @@ export default function Home() {
   
     return (
       <div
-        style={{
-          height: "100vh",
-          width: "100vw",
-        }}
+      //   style={{
+      //     height: "100vh",
+      //     width: "100vw",
+      //   }}
       >
-        {user ? (
+       <h1>Hello</h1>
           <div className="d-flex">
-            <Sidebar handleLogout={handleLogout} user={user} />
             <Container className="d-flex flex-column justify-content-center align-items-center">
               {/* <img
                 src="https://i.imgur.com/NgLwrCz.png"
@@ -155,14 +142,7 @@ export default function Home() {
           handleClose={() => handleCloseModal(setScheduleModal)}
         />
           </div>
-        ) : (
-          <AuthPage
-            user={user}
-            setUser={setUser}
-            handleClose={handleLogout}
-            getUSer={getUser}
-          />
-        )}
+
   
 
       </div>
