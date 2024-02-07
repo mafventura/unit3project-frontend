@@ -11,7 +11,7 @@ import Sidebar from "./Components/Sidebar";
 import DisplayDaily from "./Components/Dailies/DisplayDaily";
 import "./App.css";
 
-export default function Home({user, setUser, getUser, fetchData}) {
+export default function Home({user, setUser, getUser, todos, setTodos, fetchData}) {
     const [quicksModal, setQuicksModal] = useState(false);
     const [quicks, setQuicks] = useState([
       {
@@ -23,12 +23,6 @@ export default function Home({user, setUser, getUser, fetchData}) {
     ])
     const [todoModal, setTodoModal] = useState(false);
     const [scheduleModal, setScheduleModal] = useState(false);
-    const [todos, setTodos] = useState([
-      {
-        todo: "",
-        completed: false,
-      },
-    ]);
   
     function handleShowModal(modalType) {
       modalType(true);
@@ -38,16 +32,11 @@ export default function Home({user, setUser, getUser, fetchData}) {
       modalType(false);
     }
 
-  
-
-  
     function deleteCompletedTodo(index) {
       // console.log(index);
       const updatedTodos = todos.filter((todo, idx) => index !== idx);
       setTodos(updatedTodos);
     }
-  
-  
   
     // useEffect(() => {
     //   getUser();
@@ -87,12 +76,7 @@ export default function Home({user, setUser, getUser, fetchData}) {
     }, [user]);
 
     return (
-      <div
-      //   style={{
-      //     height: "100vh",
-      //     width: "100vw",
-      //   }}
-      >
+      <div>
        <h1>Hello</h1>
           <div className="d-flex">
             <Container className="d-flex flex-column justify-content-center align-items-center">

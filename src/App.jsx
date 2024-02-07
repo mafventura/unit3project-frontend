@@ -14,6 +14,12 @@ import Home from "./Home";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [todos, setTodos] = useState([
+    {
+      todo: '',
+      completed: false,
+    },
+  ])
 
   async function getUser() {
     try {
@@ -53,17 +59,16 @@ function App() {
       console.error(e);
     }
   }, [user]);
-
   return (
     <>
       {user ? (
         <div className="d-flex">
           <Sidebar user={user} handleLogout={handleLogout} />
           <Routes>
-            <Route path="/todos" element={<AllToDos fetchData={fetchData} />} />
+            <Route path="/todos" element={<AllToDos fetchData={fetchData} todos={todos} />} />
             <Route
               path="/"
-              element={<Home user={user} setUser={setUser} getUser={getUser} fetchData={fetchData} />}
+              element={<Home user={user} setUser={setUser} getUser={getUser} fetchData={fetchData} todos={todos} setTodos={setTodos} />}
             />
           </Routes>
         </div>
