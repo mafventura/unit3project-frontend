@@ -111,7 +111,7 @@ function App() {
       style={{
         height: "100vh",
         width: "100vw",
-      }}
+      }}git add 
     >
       {user ? (
         <div className="d-flex">
