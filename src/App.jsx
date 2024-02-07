@@ -15,6 +15,7 @@ function App() {
   const [quicksModal, setQuicksModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
   const [scheduleModal, setScheduleModal] = useState(false);
+  const [quicks, setQuicks] = useState([]);
   const [todos, setTodos] = useState([
     {
       todo: "",
@@ -77,11 +78,18 @@ function App() {
     }
   }, [user]);
 
+<<<<<<< HEAD
   const fetchDataSchedule = useCallback(async () => {
     console.log("fetching");
     try {
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/schedules`,
+=======
+  const fetchQuicksData = useCallback(async () => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/dailies/your-user-id`,
+>>>>>>> development
         {
           headers: {
             "user-email": user.email,
@@ -90,12 +98,25 @@ function App() {
         }
       );
       const result = response.data;
+<<<<<<< HEAD
       setSchedules(result);
+=======
+      setQuicks(result);
+>>>>>>> development
     } catch (e) {
       console.error(e);
     }
   }, [user]);
 
+<<<<<<< HEAD
+=======
+  useEffect(() => {
+    if (user?.email) {
+      fetchQuicksData();
+    }
+  }, [user]);
+
+>>>>>>> development
   useEffect(() => {
     getUser();
   }, []);
@@ -113,7 +134,7 @@ function App() {
       style={{
         height: "100vh",
         width: "100vw",
-      }}
+      }}git add 
     >
       {user ? (
         <div className="d-flex">
@@ -177,6 +198,7 @@ function App() {
       <Quicks
         showModal={quicksModal}
         handleClose={() => handleCloseModal(setQuicksModal)}
+        user={user}
       />
       <ToDoList
         showModal={todoModal}
