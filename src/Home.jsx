@@ -1,13 +1,9 @@
-import { useState, useEffect, useCallback } from "react";
-import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { Button, Container } from "react-bootstrap";
-import axios from "axios";
-import AuthPage from "./Components/AuthPage";
 import Quicks from "./Components/Dailies/Quicks";
 import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
-import Sidebar from "./Components/Sidebar";
 import DisplayDaily from "./Components/Dailies/DisplayDaily";
 import "./App.css";
 
@@ -51,7 +47,6 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
 
     return (
       <div>
-       <h1>Hello</h1>
           <div className="d-flex">
             <Container className="d-flex flex-column justify-content-center align-items-center">
               {/* <img
@@ -122,9 +117,6 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
           handleClose={() => handleCloseModal(setScheduleModal)}
         />
           </div>
-
-  
-
       </div>
     );
 }
