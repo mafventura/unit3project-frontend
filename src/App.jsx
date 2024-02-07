@@ -5,7 +5,7 @@ import axios from "axios";
 import AuthPage from "./Components/AuthPage";
 import Quicks from "./Components/Quicks";
 import ToDoList from "./Components/todos/ToDoList";
-import Schedule from "./Components/Schedule";
+import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
 import "./App.css";
@@ -19,6 +19,13 @@ function App() {
     {
       todo: "",
       completed: false,
+    },
+  ]);
+  const [schedules, setSchedules] = useState([
+    {
+      date: new Date(),
+      time: ["10:00", "11:00"],
+      event: "",
     },
   ]);
 
@@ -70,6 +77,25 @@ function App() {
     }
   }, [user]);
 
+  const fetchDataSchedule = useCallback(async () => {
+    console.log("fetching");
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BACKEND_URL}/schedules`,
+        {
+          headers: {
+            "user-email": user.email,
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const result = response.data;
+      setSchedules(result);
+    } catch (e) {
+      console.error(e);
+    }
+  }, [user]);
+
   useEffect(() => {
     getUser();
   }, []);
@@ -78,6 +104,7 @@ function App() {
     if (user?.email) {
       // console.log("fet", user);
       fetchData();
+      fetchDataSchedule();
     }
   }, [user]);
 
@@ -163,6 +190,9 @@ function App() {
       <Schedule
         showModal={scheduleModal}
         handleClose={() => handleCloseModal(setScheduleModal)}
+        schedules={schedules}
+        setSchedules={setSchedules}
+        fetchDataSchedule={fetchDataSchedule}
       />
     </div>
   );
