@@ -5,7 +5,7 @@ import { FaRegMoon } from 'react-icons/fa'
 import axios from 'axios' 
 
 
-const Quicks = ({ showModal, handleClose }) => {
+const Quicks = ({ showModal, handleClose, user }) => {
   const [activeTab, setActiveTab] = useState('hydration')
   const [hydrationLevel, setHydrationLevel] = useState(1) // 1 to 4 indicating hydration level
   const [mood, setMood] = useState('')
@@ -29,25 +29,32 @@ const Quicks = ({ showModal, handleClose }) => {
   }
 
   const handleQuoteChange = (event) => {
-    setQuote(event.target.value);
+    setQuote(event.target.value)
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async () => {    
     try {
+      console.log('test')
       // Make a POST request to backend endpoint
-      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/dailies`, {
+      const response = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/dailies/add`, {
         water: hydrationLevel,
         mood,
         sleep: sleepLevel,
         quote,
         userId: 'Users-id', // Replace with the actual user ID
-      });
+      }, {
+        headers: {
+        "userEmail": user.email,
+        "Content-Type": "application/json",
+        },
+    }
+    )
   
       console.log('Response from server:', response.data)
    
       handleClose(); // Close the modal or perform any other actions on success
     } catch (error) {
-      console.error('Error sending data to server:', error);
+      console.error('Error sending data to server:', error)
       // Handle errors or provide user feedback
     }
   }
