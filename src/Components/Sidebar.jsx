@@ -33,7 +33,7 @@ export default function Sidebar({ handleLogout, user }) {
             <NavLink to='/'>
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink>
+            <NavLink to="/dailies">
               <CDBSidebarMenuItem icon="calendar-plus">All Daily's</CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/todos">
