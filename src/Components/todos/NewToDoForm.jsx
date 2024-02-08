@@ -1,7 +1,7 @@
 // import axios from "axios";
 // import { useState } from "react";
 
-// export default function NewToDoForm({ onAddToDo, user }) {
+// export default function NewToDoForm({ fetchData, user }) {
 //   const [newToDo, setNewToDo] = useState({
 //     todo: "",
 //     completed: false,
@@ -32,7 +32,7 @@
 //             todo: "",
 //             completed: false,
 //           });
-//         onAddToDo();
+//         fetchData();
 //     } catch (e) {
 //         console.error(e)
 //     }
@@ -66,7 +66,7 @@
 import axios from "axios";
 import { useState } from "react";
 
-export default function NewToDoForm({ onAddToDo, user }) {
+export default function NewToDoForm({ fetchData, user }) {
   const [newToDo, setNewToDo] = useState({
     todo: "",
     completed: false,
@@ -98,7 +98,7 @@ export default function NewToDoForm({ onAddToDo, user }) {
         completed: false,
         date: new Date().toISOString().substr(0, 10), // Reset date to today
       });
-      onAddToDo();
+      fetchData();
     } catch (error) {
       console.error(error);
     }

@@ -1,14 +1,10 @@
 import { useCallback } from 'react'
 import { Button } from 'react-bootstrap'
+import { useUser } from '../context/UserContext'
 
 export default function AuthPage({ user, setUser, handleLogout, getUSer }) {
+    const { googleAuth } = useUser()
 
-    const googleAuth = useCallback(() => {
-        window.open(
-            `${process.env.REACT_APP_BACKEND_URL}/auth/google/callback`,
-            '_self'
-        )
-    }, [])
 
     return(
         <div style={{

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, InputGroup, Form } from "react-bootstrap";
-import NewToDoForm from "./NewToDo";
+import NewToDoForm from "./NewToDoForm";
 import ToDoListItem from "./ToDoListItem";
+import { useToDos } from "../../context/ToDosContext";
 
 const ToDoList = ({
   showModal,
@@ -12,18 +13,9 @@ const ToDoList = ({
   fetchData,
   deleteCompletedTodo,
 }) => {
-  // function addToDo(todo) {
-  //   setTodos([...todos, todo]);
-  // }
 
-  function completedTodo(index) {
-    const updatedTodos = [...todos];
-    updatedTodos[index] = {
-      ...updatedTodos[index],
-      completed: !updatedTodos[index].completed,
-    };
-    setTodos(updatedTodos);
-  }
+
+  const { completedTodo } = useToDos()
 
   const toDoListItems = todos.map((todo, idx) => {
     // console.log(todo);
@@ -41,10 +33,6 @@ const ToDoList = ({
     }
   });
 
-  useEffect(() => {
-    // fetchData();
-  }, []);
-
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -53,7 +41,7 @@ const ToDoList = ({
 
       <Modal.Body>
         {/* {toDoListItems} */}
-        <NewToDoForm onAddToDo={fetchData} todo={todos} user={user} />
+        <NewToDoForm fetchData={fetchData} todo={todos} user={user} />
       </Modal.Body>
 
       <Modal.Footer>

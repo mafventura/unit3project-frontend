@@ -6,11 +6,14 @@ import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import DisplayDaily from "./Components/Dailies/DisplayDaily";
 import "./App.css";
+import { useToDos } from "./context/ToDosContext";
 
-export default function Home({user, setUser, getUser, todos, setTodos, fetchData, quicks, setQuicks, fetchQuicksData}) {
+export default function Home({user, setUser, getUser,  quicks, setQuicks, fetchQuicksData}) {
     const [quicksModal, setQuicksModal] = useState(false);
     const [todoModal, setTodoModal] = useState(false);
     const [scheduleModal, setScheduleModal] = useState(false);
+    
+    const { deleteCompletedTodo, todos, setTodos, fetchData, } = useToDos()
   
     function handleShowModal(modalType) {
       modalType(true);
@@ -20,19 +23,10 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
       modalType(false);
     }
 
-    function deleteCompletedTodo(index) {
-      // console.log(index);
-      const updatedTodos = todos.filter((todo, idx) => index !== idx);
-      setTodos(updatedTodos);
-    }
-  
-    // useEffect(() => {
-    //   getUser();
-    // }, []);
+
   
     useEffect(() => {
       if (user?.email) {
-        // console.log("fet", user);
         fetchData();
       }
     }, [user]);
@@ -49,11 +43,7 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
       <div>
           <div className="d-flex">
             <Container className="d-flex flex-column justify-content-center align-items-center">
-              {/* <img
-                src="https://i.imgur.com/NgLwrCz.png"
-                alt="journey app logo"
-                className="mb-5"
-              /> */}
+
               <Container className="d-flex justify-content-center">
                 <Button
                   variant="success"
@@ -92,7 +82,7 @@ export default function Home({user, setUser, getUser, todos, setTodos, fetchData
                   fetchData={fetchData}
                   deleteCompletedTodo={deleteCompletedTodo}
                 />
-                <DisplayDaily fetchQuicksData={fetchQuicksData} quicks={quicks}/>
+                <DisplayDaily fetchQuicksData={fetchQuicksData} quicks={quicks} />
                 
 
               </Container>
