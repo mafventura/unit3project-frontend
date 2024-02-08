@@ -7,6 +7,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ToDosProvider } from "./context/ToDosContext";
 import { UsersProvider } from "./context/UserContext";
 import { DailiesProvider } from "./context/DailiesContext"
+import { ScheduleProvider } from "./context/ScheduleContext"
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -15,9 +16,11 @@ root.render(
       <UsersProvider>
         <ToDosProvider>
           <DailiesProvider>
-            <Router>
-              <App />
-            </Router>
+            <ScheduleProvider>
+              <Router>
+                <App />
+              </Router>
+            </ScheduleProvider>
           </DailiesProvider>
         </ToDosProvider>
       </UsersProvider>
