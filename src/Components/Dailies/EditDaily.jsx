@@ -10,7 +10,7 @@ export default function EditDaily({
   fetchQuicksData,
   selectedDailyId,
   quicks,
-  setQuicks
+  setQuicks,
 }) {
   console.log("THIS IS THE ID", selectedDailyId);
 
@@ -23,6 +23,7 @@ export default function EditDaily({
     handleSleepChange,
     quote,
     handleQuoteChange,
+    editDaily
   } = useDailies();
 
   const waterRef = useRef();
@@ -45,12 +46,6 @@ export default function EditDaily({
     }
   }
 
-  useEffect(() => {
-    if (showModal) {
-      populateFormFields();
-    }
-  }, [showModal]);
-
   async function handleSubmit(e) {
     try {
       await editDaily(selectedDailyId, {
@@ -65,28 +60,26 @@ export default function EditDaily({
     }
   }
 
-  async function editDaily(selectedDailyId, updatedDaily) {
-    try {
-      const response = await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/dailies/${selectedDailyId}`,
-        updatedDaily
-      );
-      setQuicks([...quicks, response.data]);
-    } catch (e) {
-      console.log("Error editing quicks", e);
+  useEffect(() => {
+    if (showModal) {
+      populateFormFields();
     }
-  }
+  }, [showModal]);
 
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title style={{ color: "#3a7e54", fontSize: 40 }}>Dailies</Modal.Title>
+        <Modal.Title style={{ color: "#3a7e54", fontSize: 40 }}>
+          Dailies
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {/* Add some styles to the lists */}
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
-            <h4 style={{ marginBottom: 20, color: "#3a7e54" }}>How much water have you drunk?</h4>
+            <h4 style={{ marginBottom: 20, color: "#3a7e54" }}>
+              How much water have you drunk?
+            </h4>
             <select
               ref={waterRef}
               value={hydrationLevel}

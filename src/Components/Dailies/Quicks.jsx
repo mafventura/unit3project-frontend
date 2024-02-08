@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
+import { useDailies } from "../../context/DailiesContext";
 
 const Quicks = ({
   showModal,
@@ -10,70 +11,22 @@ const Quicks = ({
   selectedDaily,
   setSelectedDaily,
 }) => {
-  const [hydrationLevel, setHydrationLevel] = useState(""); 
-  const [mood, setMood] = useState("");
-  const [sleepLevel, setSleepLevel] = useState(""); 
-  const [quote, setQuote] = useState("");
+ 
+  const {
+    hydrationLevel,
+    handleHydrationChange,
+    mood,
+    handleMoodChange,
+    sleepLevel,
+    handleSleepChange,
+    quote,
+    handleQuoteChange,
+    createDaily
+  } = useDailies()
 
-  const handleHydrationChange = (event) => {
-    setHydrationLevel(event.target.value);
-  };
 
-  const handleMoodChange = (event) => {
-    setMood(event.target.value);
-  };
-
-  const handleSleepChange = (event) => {
-    setSleepLevel(event.target.value);
-  };
-
-  const handleQuoteChange = (event) => {
-    setQuote(event.target.value);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      if (hydrationLevel === "" || mood === "" || sleepLevel === "" || quote === "") {
-        alert("all fields required")
-      }
-      // Make a POST request to backend endpoint
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/dailies/add`,
-        {
-          water: hydrationLevel,
-          mood,
-          sleep: sleepLevel,
-          quote,
-        },
-        {
-          headers: {
-            userEmail: user.email,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response);
-
-      console.log("Response from server:", response.data);
-      fetchQuicksData();
-      handleClose(); // Close the modal or perform any other actions on success
-    } catch (error) {
-      console.error("Error sending data to server:", error);
-      // Handle errors or provide user feedback
-    }
-  };
-
-  // useEffect(() => {
-  //   // Load saved state from localStorage on component mount
-  //   const savedState = JSON.parse(localStorage.getItem("quicksState")) || {};
-  //   setHydrationLevel(savedState.hydrationLevel || 1);
-  //   setMood(savedState.mood || "");
-  //   setSleepLevel(savedState.sleepLevel || 1);
-  //   setQuote(savedState.quote || "");
-  // }, []);
 
   useEffect(() => {
-    // Save state to localStorage whenever it changes
     const stateToSave = {
       hydrationLevel,
       mood,
@@ -91,13 +44,12 @@ const Quicks = ({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {/* Add some styles to the lists */}
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginBottom: 20, color: "#3a7e54" }}>
               How much water have you drunk?
-              </h4>
-              <select
+            </h4>
+            <select
               value={hydrationLevel}
               onChange={handleHydrationChange}
               style={{ borderRadius: "8px", padding: "5px" }}
@@ -110,8 +62,7 @@ const Quicks = ({
             </select>
           </li>
         </ul>
-        {/* </Tab> */}
-        {/* <Tab eventKey="mood" title="Mood"> */}
+
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
@@ -131,8 +82,7 @@ const Quicks = ({
             </select>
           </li>
         </ul>
-        {/* </Tab> */}
-        {/* <Tab eventKey="sleep" title="Sleep"> */}
+
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
@@ -151,9 +101,7 @@ const Quicks = ({
             </select>
           </li>
         </ul>
-        {/* </Tab> */}
 
-        {/* <Tab eventKey="quote" title="Quote"> */}
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
@@ -168,8 +116,6 @@ const Quicks = ({
             />
           </li>
         </ul>
-        {/* </Tab> */}
-        {/* </Tabs> */}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>
@@ -178,7 +124,8 @@ const Quicks = ({
         <Button
           variant="primary"
           onClick={() => {
-            handleSubmit();
+            createDaily();
+            handleClose()
             fetchQuicksData();
           }}
           style={{ backgroundColor: "#3a7e54", borderColor: "#3a7e54" }}

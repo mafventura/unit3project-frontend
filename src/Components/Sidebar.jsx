@@ -45,7 +45,7 @@ export default function Sidebar({ handleLogout, user }) {
             </NavLink>
             <NavLink to="/todos">
               <CDBSidebarMenuItem icon="calendar-check">
-                To Do's
+                All To Do's
               </CDBSidebarMenuItem>
             </NavLink>
             <NavLink>
