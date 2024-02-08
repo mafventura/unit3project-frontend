@@ -6,6 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import EditDaily from "./EditDaily";
 
 export default function DisplayDaily({
   fetchQuicksData,
@@ -15,6 +16,8 @@ export default function DisplayDaily({
   setQuicksModal,
   selectedDaily,
   setSelectedDaily,
+  handleCloseModal,
+  handleShowModal
 }) {
   // console.log("these are the quicks", quicks);
 
@@ -190,7 +193,8 @@ export default function DisplayDaily({
                   marginTop: "8px",
                 }}
                 onClick={() => {
-                  handleButtonClick(dailyCheck);
+                  // handleButtonClick(dailyCheck);
+                  handleCloseModal
                 }}
               >
                 <CiEdit />
@@ -216,22 +220,8 @@ export default function DisplayDaily({
         </>
       )}
 
-<Modal show={quicksModal} onHide={() => setQuicksModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Daily Check</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedDaily && (
-            <>
-              {/* Render details of the selected daily check in the modal */}
-              <p>Water: {selectedDaily.water}</p>
-              <p>Mood: {selectedDaily.mood}</p>
-              <p>Sleep: {selectedDaily.sleep}</p>
-              <p>Quote: {selectedDaily.quote}</p>
-            </>
-          )}
-        </Modal.Body>
-      </Modal>
+
+                <EditDaily showModal={showModal} handleClose={handleClose} />
     </div>
   );
 }

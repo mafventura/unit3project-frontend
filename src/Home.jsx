@@ -94,6 +94,8 @@ export default function Home({
               setQuicksModal={setQuicksModal}
               selectedDaily={selectedDaily}
               setSelectedDaily={setSelectedDaily}
+              handleCloseModal={handleCloseModal}
+              handleShowModal={handleShowModal}
             />
           </Container>
         </Container>

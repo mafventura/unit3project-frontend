@@ -1,9 +1,15 @@
-export default function EditDaily() {
+import { Modal } from "react-bootstrap"
+
+export default function EditDaily({showModal, handleClose}) {
    
     
   return (
     <Modal show={showModal} onHide={handleClose}>
-      <Modal.Header closeButton>
+        <Modal.Header>
+            Hi
+        </Modal.Header>
+        </Modal>
+      {/* <Modal.Header closeButton>
         <Modal.Title style={{ color: "#3a7e54", fontSize: 40 }}>
           Dailies
         </Modal.Title>
@@ -113,6 +119,6 @@ export default function EditDaily() {
           Save
         </Button>
       </Modal.Footer>
-    </Modal>
+    </Modal> */}
   );
 }
