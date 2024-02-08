@@ -117,13 +117,13 @@ export default function NewToDoForm({ fetchData, user }) {
           required
           pattern=".{3,}"
         />
-        <input
+        {/* <input
           type="date"
           name="date"
           value={newToDo.date}
           onChange={handleChange}
           required
-        />
+        /> */}
         <button type="submit">ADD</button>
       </form>
     </>

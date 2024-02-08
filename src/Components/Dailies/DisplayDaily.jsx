@@ -5,6 +5,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import axios from "axios";
 import EditDaily from "./EditDaily"
 import { useState, useEffect } from "react";
+import { useDailies } from "../../context/DailiesContext";
 
 export default function DisplayDaily({
   fetchQuicksData,
@@ -19,6 +20,8 @@ export default function DisplayDaily({
   handleShowModal,
   user
 }) {
+
+  const { deleteDaily } = useDailies()
 
   const [selectedDailyId, setSelectedDailyId] = useState(null);
 
@@ -35,14 +38,7 @@ export default function DisplayDaily({
     return createdAtDateOnly.getTime() === todayDate.getTime();
   });
 
-  async function deleteDaily(selectedDailyId) {
-    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/dailies/${selectedDailyId}`)
-        .then(() => {
-            setQuicks(quicks.filter(daily => daily._id !== selectedDailyId))
-            fetchQuicksData()
-        })
-        .catch(error => console.error("Error deleting expense", error))
-  }
+
 
   return (
     <div>
