@@ -64,7 +64,7 @@ import { useEffect } from "react";
 import { useToDos } from "../../context/ToDosContext";
 import AllTodosInDays from "./AllTodosInDays";
 
-export default function AllToDos() {
+export default function YearsAndMonthToDos() {
   const {
     groupedTodos,
     setGroupedTodos,

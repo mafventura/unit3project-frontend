@@ -1,93 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Button, Form } from "react-bootstrap";
-import { BsDroplet } from "react-icons/bs";
-import { FaRegMoon } from "react-icons/fa";
-import axios from "axios";
-
-const Quicks = ({
-  showModal,
-  handleClose,
-  user,
-  fetchQuicksData,
-  selectedDaily,
-  setSelectedDaily,
-}) => {
-  const [activeTab, setActiveTab] = useState("hydration");
-  const [hydrationLevel, setHydrationLevel] = useState(1); // 1 to 4 indicating hydration level
-  const [mood, setMood] = useState("");
-  const [sleepLevel, setSleepLevel] = useState(0); // 1 to 4 indicating sleep level
-  const [quote, setQuote] = useState("");
-
-  const handleTabSelect = (selectedTab) => {
-    setActiveTab(selectedTab);
-  };
-
-  const handleHydrationChange = (level) => {
-    setHydrationLevel(level);
-  };
-
-  const handleMoodChange = (event) => {
-    setMood(event.target.value);
-  };
-
-  const handleSleepChange = (level) => {
-    setSleepLevel(level);
-  };
-
-  const handleQuoteChange = (event) => {
-    setQuote(event.target.value);
-  };
-
-  const handleSubmit = async () => {
-    try {
-      console.log("test");
-      // Make a POST request to backend endpoint
-      const response = await axios.post(
-        `${process.env.REACT_APP_BACKEND_URL}/dailies/add`,
-        {
-          water: hydrationLevel,
-          mood,
-          sleep: sleepLevel,
-          quote,
-        },
-        {
-          headers: {
-            userEmail: user.email,
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      console.log(response);
-
-      console.log("Response from server:", response.data);
-      fetchQuicksData();
-      handleClose(); // Close the modal or perform any other actions on success
-    } catch (error) {
-      console.error("Error sending data to server:", error);
-      // Handle errors or provide user feedback
-    }
-  };
-
-  useEffect(() => {
-    // Load saved state from localStorage on component mount
-    const savedState = JSON.parse(localStorage.getItem("quicksState")) || {};
-    setHydrationLevel(savedState.hydrationLevel || 1);
-    setMood(savedState.mood || "");
-    setSleepLevel(savedState.sleepLevel || 1);
-    setQuote(savedState.quote || "");
-  }, []);
-
-  useEffect(() => {
-    // Save state to localStorage whenever it changes
-    const stateToSave = {
-      hydrationLevel,
-      mood,
-      sleepLevel,
-      quote,
-    };
-    localStorage.setItem("quicksState", JSON.stringify(stateToSave));
-  }, [hydrationLevel, mood, sleepLevel, quote]);
-
+export default function EditDaily() {
+   
+    
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
@@ -202,6 +115,4 @@ const Quicks = ({
       </Modal.Footer>
     </Modal>
   );
-};
-
-export default Quicks;
+}

@@ -8,7 +8,7 @@ import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import Sidebar from "./Components/Sidebar";
-import AllToDos from "./Components/todos/YearsAndMonthToDos";
+import YearsAndMonthToDos from "./Components/todos/YearsAndMonthToDos";
 import "./App.css";
 import Home from "./Home";
 import AllDailies from "./Components/Dailies/AllDailies";
@@ -18,12 +18,13 @@ import { useToDos } from "./context/ToDosContext";
 function App() {
   const { todos, setTodos, fetchData } = useToDos();
   const { user, setUser, getUser, handleLogout } = useUser();
+  const [selectedDaily, setSelectedDaily] = useState(null);
 
   const [quicks, setQuicks] = useState([
     {
-      water: 1,
+      water: 0,
       mood: "",
-      sleep: 1,
+      sleep: 0,
       quote: "",
     },
   ]);
@@ -60,7 +61,9 @@ function App() {
           <Routes>
             <Route
               path="/todos"
-              element={<AllToDos fetchData={fetchData} todos={todos} />}
+              element={
+                <YearsAndMonthToDos fetchData={fetchData} todos={todos} />
+              }
             />
             <Route
               path="/dailies"
@@ -78,6 +81,8 @@ function App() {
                   quicks={quicks}
                   setQuicks={setQuicks}
                   fetchQuicksData={fetchQuicksData}
+                  selectedDaily={selectedDaily}
+                  setSelectedDaily={setSelectedDaily}
                 />
               }
             />
