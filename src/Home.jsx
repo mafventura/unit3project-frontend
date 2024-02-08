@@ -5,6 +5,7 @@ import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import DisplayDaily from "./Components/Dailies/DisplayDaily";
+import DisplaySchedule from "./Components/schedule/DisplaySchedule";
 import "./App.css";
 import { useToDos } from "./context/ToDosContext";
 

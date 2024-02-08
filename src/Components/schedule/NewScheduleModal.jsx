@@ -5,103 +5,99 @@ import DatePicker from "react-datepicker";
 import TimeRangePicker from "@wojtekmaj/react-timerange-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import "@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css";
+import { useSchedule } from "../../context/ScheduleContext";
+import { useUser } from "../../context/UserContext";
 
 // type ValuePiece = Date | string | null;
 
 // type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function Schedule({ showModal, handleClose, user, fetchDataSchedule }) {
+export default function Schedule({ showModal, handleClose, fetchDataSchedule }) {
 
-  const [newSchedule, setNewSchedule] = useState({
-    date: new Date(),
-    time: ["10:00", "11:00"],
-    event: "",
-  });
+  const { newSchedule, setNewSchedule, handleChangeCreate, getSchedule } = useSchedule()
+  const { user } = useUser();
 
-  function handleChange(name, value) {
-    setNewSchedule({
-      ...newSchedule,
-      [name]: value,
-    });
-  }
-
-  async function handleAddSchedule(evt) {
-    evt.preventDefault();
+  async function addSchedule(e) {
+    e.preventDefault();
     try {
-      await axios.post(`${process.env.REACT_APP_BACKEND_URL}/schedules/add`, newSchedule, {
-        headers: {
-          "user-email": user.email,
-          "Content-Type": "application/json",
-        },
-      });
-      setNewSchedule({
-        date: new Date(),
-        time: ["10:00", "11:00"],
-        event: "",
-      });
-      fetchDataSchedule()
-    } catch (e) {
-      console.error(e);
+        await axios.post(
+            `${process.env.REACT_APP_BACKEND_URL}/schedules/add`,
+            newSchedule,
+            {
+                headers: {
+                    "user-email": user.email,
+                    "Content-Type": "application/json",
+                },
+            }
+        );
+        setNewSchedule({
+            date: new Date(),
+            time: ["10:00", "11:00"],
+            event: "",
+        });
+        getSchedule();
+    } catch (error) {
+        console.error(error);
     }
-  }
+}
 
   return (
     <Modal show={showModal} onHide={handleClose}>
-      <Form onSubmit={handleAddSchedule}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Event to Schedule</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Date</Form.Label>
-            <br />
-            <DatePicker
-              selected={newSchedule.date}
-              dateFormat="dd-MM-y"
-              value={newSchedule.date}
-              onChange={(date) => handleChange("date", date)}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="amount">
-            <Form.Label>Time</Form.Label>
-            <br />
-            <TimeRangePicker
-              onChange={(time) => handleChange("time", time)}
-              value={newSchedule.time}
-              disableClock={true}
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="description">
-            <Form.Label>Event</Form.Label>
-            <Form.Control
-              type="text"
-              required
-              value={newSchedule.event}
-              onChange={(e) => handleChange("event", e.target.value)}
-            />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button
-            type="submit"
-            variant="success"
-            onClick={(evt) => {
-              handleAddSchedule(evt);
-              handleClose();
-            }}
-          >
-            Add
-          </Button>
-          <Button
-            variant="success"
-            onClick={() => {
-              handleClose();
-            }}
-          >
-            Close
-          </Button>
-        </Modal.Footer>
-      </Form>
-    </Modal>
+  <Form onSubmit={addSchedule}>
+    <Modal.Header closeButton>
+      <Modal.Title>Add Event to Schedule</Modal.Title>
+    </Modal.Header>
+    <Modal.Body>
+      <Form.Group className="mb-3" controlId="description">
+        <Form.Label>Date</Form.Label>
+        <br />
+        <DatePicker
+          selected={newSchedule.date}
+          dateFormat="dd-MM-y"
+          value={newSchedule.date}
+          onChange={(date) => handleChangeCreate("date", date)}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="amount">
+        <Form.Label>Time</Form.Label>
+        <br />
+        <TimeRangePicker
+          onChange={(time) => handleChangeCreate("time", time)}
+          value={newSchedule.time}
+          disableClock={true}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="description">
+        <Form.Label>Event</Form.Label>
+        <Form.Control
+          type="text"
+          required
+          value={newSchedule.event}
+          onChange={(e) => handleChangeCreate("event", e.target.value)}
+        />
+      </Form.Group>
+    </Modal.Body>
+    <Modal.Footer>
+      <Button
+        type="submit"
+        variant="success"
+        onClick={() => {
+          handleClose();
+        }}
+      >
+        Add
+      </Button>
+      <Button
+        variant="success"
+        onClick={() => {
+          handleClose();
+        }}
+      >
+        Close
+      </Button>
+    </Modal.Footer>
+  </Form>
+</Modal>
+
   );
 }
