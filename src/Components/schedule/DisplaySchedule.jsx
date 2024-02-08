@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, InputGroup, Form } from "react-bootstrap";
 import { useSchedule } from "../../context/ScheduleContext";
 import { useEffect } from "react";
 
@@ -7,8 +7,8 @@ export default function DisplaySchedule({ setSchedule }) {
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
-        const day = date.getDate().toString().padStart(2, '0');
-        const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Month is zero-based
+        const day = date.getDate().toString().padStart(2, "0");
+        const month = (date.getMonth() + 1).toString().padStart(2, "0"); // Month is zero-based
         const year = date.getFullYear().toString().substr(-2); // Get last two digits of the year
         return `${day}/${month}/${year}`;
     };
@@ -34,11 +34,15 @@ export default function DisplaySchedule({ setSchedule }) {
         <div style={{ maxWidth: "50%" }}>
             {scheduleToday.map((element, index) => (
                 <Container key={index} className="d-flex">
-                    {/* Format date in dd/mm/yy format */}
-                    <p className="p-2">{formatDate(element.date)}</p>
-                    <p className="p-2">{element.time[0]}</p>
-                    <p className="p-2">{element.time[1]}</p>
-                    <p className="p-2">{element.event}</p>
+                    <InputGroup className="mb-3">
+                        <InputGroup.Text>
+                            {element.time[0]} - {element.time[1]}
+                        </InputGroup.Text>
+                        <Form.Control
+                            aria-label="Text input with checkbox"
+                            value={element.event}
+                        />
+                    </InputGroup>
                 </Container>
             ))}
         </div>

@@ -34,7 +34,7 @@ export default function Home({
   };
   const todayTtile = new Date().toLocaleDateString('en-GB', options);
 
-  
+
 
   function handleShowModal(modalType) {
     modalType(true);
@@ -114,18 +114,23 @@ export default function Home({
           <h5><strong>{`${todayTtile}`}</strong></h5>
         </Container>
 
-        <Container>
-          <p>Today's To-do's:</p>
-          <DisplayToDo
-            todos={todos}
-            setTodos={setTodos}
-            fetchData={fetchData}
-            deleteCompletedTodo={deleteCompletedTodo}
-          />
-          {/* DisplaySchedule */}
+        <Container className="d-flex flex-row justify-content-center">
+          <Container className="d-flex flex-column align-items-center">
+            <p className="text-decoration-underline">Today's To-do's:</p>
+            <DisplayToDo
+              todos={todos}
+              setTodos={setTodos}
+              fetchData={fetchData}
+              deleteCompletedTodo={deleteCompletedTodo}
+            />
+          </Container>
+          <Container className="d-flex flex-column align-items-center">
+            <p className="text-decoration-underline">Today's Schedule:</p>
+            <DisplaySchedule />
+          </Container>
         </Container>
         <Container className="QUICK d-flex flex-column align-items-center">
-          <p>Today's Daily Check:</p>
+          <p className="text-decoration-underline">Today's Daily Check:</p>
           <DisplayDaily
             fetchQuicksData={fetchQuicksData}
             quicks={quicks}
