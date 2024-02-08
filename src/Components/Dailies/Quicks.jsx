@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import { BsDroplet } from "react-icons/bs";
-import { FaRegMoon } from "react-icons/fa";
 import axios from "axios";
 
 const Quicks = ({
@@ -12,26 +10,21 @@ const Quicks = ({
   selectedDaily,
   setSelectedDaily,
 }) => {
-  const [activeTab, setActiveTab] = useState("hydration");
-  const [hydrationLevel, setHydrationLevel] = useState(1); // 1 to 4 indicating hydration level
+  const [hydrationLevel, setHydrationLevel] = useState(""); 
   const [mood, setMood] = useState("");
-  const [sleepLevel, setSleepLevel] = useState(0); // 1 to 4 indicating sleep level
+  const [sleepLevel, setSleepLevel] = useState(""); 
   const [quote, setQuote] = useState("");
 
-  const handleTabSelect = (selectedTab) => {
-    setActiveTab(selectedTab);
-  };
-
-  const handleHydrationChange = (level) => {
-    setHydrationLevel(level);
+  const handleHydrationChange = (event) => {
+    setHydrationLevel(event.target.value);
   };
 
   const handleMoodChange = (event) => {
     setMood(event.target.value);
   };
 
-  const handleSleepChange = (level) => {
-    setSleepLevel(level);
+  const handleSleepChange = (event) => {
+    setSleepLevel(event.target.value);
   };
 
   const handleQuoteChange = (event) => {
@@ -40,7 +33,9 @@ const Quicks = ({
 
   const handleSubmit = async () => {
     try {
-      console.log("test");
+      if (hydrationLevel === "" || mood === "" || sleepLevel === "" || quote === "") {
+        alert("all fields required")
+      }
       // Make a POST request to backend endpoint
       const response = await axios.post(
         `${process.env.REACT_APP_BACKEND_URL}/dailies/add`,
@@ -68,14 +63,14 @@ const Quicks = ({
     }
   };
 
-  useEffect(() => {
-    // Load saved state from localStorage on component mount
-    const savedState = JSON.parse(localStorage.getItem("quicksState")) || {};
-    setHydrationLevel(savedState.hydrationLevel || 1);
-    setMood(savedState.mood || "");
-    setSleepLevel(savedState.sleepLevel || 1);
-    setQuote(savedState.quote || "");
-  }, []);
+  // useEffect(() => {
+  //   // Load saved state from localStorage on component mount
+  //   const savedState = JSON.parse(localStorage.getItem("quicksState")) || {};
+  //   setHydrationLevel(savedState.hydrationLevel || 1);
+  //   setMood(savedState.mood || "");
+  //   setSleepLevel(savedState.sleepLevel || 1);
+  //   setQuote(savedState.quote || "");
+  // }, []);
 
   useEffect(() => {
     // Save state to localStorage whenever it changes
@@ -101,23 +96,18 @@ const Quicks = ({
           <li>
             <h4 style={{ marginBottom: 20, color: "#3a7e54" }}>
               How much water have you drunk?
-            </h4>
-            {[0.5, 1, 1.5, 2].map((amount) => (
-              <div key={amount} style={{ marginBottom: "10px" }}>
-                <BsDroplet
-                  color={amount <= hydrationLevel ? "#0000FF" : "#808080"}
-                  size={30}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleHydrationChange(amount)}
-                />
-                <span style={{ marginLeft: "5px" }}>
-                  {amount === 0.5 && "0.5 liters"}
-                  {amount === 1 && "1 liter"}
-                  {amount === 1.5 && "1.5 liters"}
-                  {amount === 2 && "2 liters"}
-                </span>
-              </div>
-            ))}
+              </h4>
+              <select
+              value={hydrationLevel}
+              onChange={handleHydrationChange}
+              style={{ borderRadius: "8px", padding: "5px" }}
+            >
+              <option value="">Select an option</option>
+              <option value="0.5">💧</option>
+              <option value="1">💧💧</option>
+              <option value="1.5">💧💧💧</option>
+              <option value="2">💧💧💧💧</option>
+            </select>
           </li>
         </ul>
         {/* </Tab> */}
@@ -132,6 +122,7 @@ const Quicks = ({
               onChange={handleMoodChange}
               style={{ borderRadius: "8px", padding: "5px" }}
             >
+              <option value="">Select an option</option>
               <option value="😃">😃 Happy</option>
               <option value="😎">😎 Relaxed</option>
               <option value="😐">😐 Neutral</option>
@@ -147,22 +138,17 @@ const Quicks = ({
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
               How many hours did you sleep?
             </h4>
-            {[1, 2, 3, 4].map((level) => (
-              <div key={level} style={{ marginBottom: "10px" }}>
-                <FaRegMoon
-                  color={level <= sleepLevel ? "blue" : "gray"}
-                  size={30}
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleSleepChange(level)}
-                />
-                <span style={{ marginLeft: "5px" }}>
-                  {level === 1 && "0-4 hours"}
-                  {level === 2 && "4-6 hours"}
-                  {level === 3 && "6-8 hours"}
-                  {level === 4 && "8+ hours"}
-                </span>
-              </div>
-            ))}
+            <select
+              value={sleepLevel}
+              onChange={handleSleepChange}
+              style={{ borderRadius: "8px", padding: "5px" }}
+            >
+              <option value="">Select an option</option>
+              <option value="0-4">🌙</option>
+              <option value="4-6">🌙🌙</option>
+              <option value="6-8">🌙🌙🌙</option>
+              <option value="8+">🌙🌙🌙🌙</option>
+            </select>
           </li>
         </ul>
         {/* </Tab> */}

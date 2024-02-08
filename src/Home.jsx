@@ -8,6 +8,7 @@ import DisplayDaily from "./Components/Dailies/DisplayDaily";
 import "./App.css";
 import { useToDos } from "./context/ToDosContext";
 
+
 export default function Home({
   user,
   setUser,
@@ -21,6 +22,7 @@ export default function Home({
   const [quicksModal, setQuicksModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
   const [scheduleModal, setScheduleModal] = useState(false);
+  const [editModal, setEditModal] = useState(false)
 
   const { deleteCompletedTodo, todos, setTodos, fetchData } = useToDos();
 
@@ -94,8 +96,11 @@ export default function Home({
               setQuicksModal={setQuicksModal}
               selectedDaily={selectedDaily}
               setSelectedDaily={setSelectedDaily}
-              handleCloseModal={handleCloseModal}
-              handleShowModal={handleShowModal}
+              showModal={editModal}
+              handleClose={() => handleCloseModal(setEditModal)}
+              editModal={editModal}
+              setEditModal={setEditModal}
+              handleShowModal={() => handleShowModal(setEditModal)}
             />
           </Container>
         </Container>
