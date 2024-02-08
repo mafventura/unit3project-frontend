@@ -23,6 +23,7 @@ export default function Home({
   const [todoModal, setTodoModal] = useState(false);
   const [scheduleModal, setScheduleModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [editSchedule, setEditSchedule] = useState(false);
 
   const { deleteCompletedTodo, todos, setTodos, fetchData } = useToDos();
 
@@ -126,7 +127,13 @@ export default function Home({
           </Container>
           <Container className="d-flex flex-column align-items-center">
             <p className="text-decoration-underline">Today's Schedule:</p>
-            <DisplaySchedule />
+            <DisplaySchedule
+              showModal={editSchedule}
+              handleClose={() => handleCloseModal(setEditSchedule)}
+              editSchedule={editSchedule}
+              setEditSchedule={setEditSchedule}
+              handleShowModal={() => handleShowModal(setEditSchedule)}
+            />
           </Container>
         </Container>
         <Container className="QUICK d-flex flex-column align-items-center">

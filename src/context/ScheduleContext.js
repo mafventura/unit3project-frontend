@@ -75,6 +75,29 @@ export function ScheduleProvider({ children }) {
         }
     }
 
+    async function deleteSchedule(scheduleId, index) {
+        try {
+            await axios.delete(
+                `${process.env.REACT_APP_BACKEND_URL}/schedules/${scheduleId}`
+            );
+            setSchedule(schedule.filter((element) => element._id !== scheduleId));
+            getSchedule();
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    async function editSchedule(selectedScheduleId, updatedSchedule) {
+        try {
+            const response = await axios.put(
+                `${process.env.REACT_APP_BACKEND_URL}/schedule/${selectedScheduleId}`,
+                updatedSchedule
+            );
+            setSchedule([...schedule, response.data]);
+        } catch (e) {
+            console.log("Error editing schedule", e);
+        }
+    }
 
 
     return (
@@ -86,7 +109,10 @@ export function ScheduleProvider({ children }) {
                 addSchedule,
                 newSchedule,
                 setNewSchedule,
-                handleChangeCreate
+                handleChangeCreate,
+                deleteSchedule,
+                editSchedule
+
             }}
         >
             {children}

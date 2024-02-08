@@ -12,7 +12,7 @@ import { useUser } from "../../context/UserContext";
 
 // type Value = ValuePiece | [ValuePiece, ValuePiece];
 
-export default function Schedule({ showModal, handleClose, fetchDataSchedule }) {
+export default function Schedule({ showModal, handleClose }) {
 
   const { newSchedule, setNewSchedule, handleChangeCreate, getSchedule } = useSchedule()
   const { user } = useUser();
@@ -83,6 +83,7 @@ export default function Schedule({ showModal, handleClose, fetchDataSchedule }) 
         variant="success"
         onClick={() => {
           handleClose();
+          getSchedule()
         }}
       >
         Add
