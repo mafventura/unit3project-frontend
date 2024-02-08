@@ -1,10 +1,9 @@
 import React from "react";
 import { Container, Button, Modal } from "react-bootstrap";
-import { BsDroplet } from "react-icons/bs";
-import { FaRegMoon } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import axios from "axios";
+import EditDaily from "./EditDaily"
 import { useState, useEffect } from "react";
 
 export default function DisplayDaily({
@@ -13,19 +12,18 @@ export default function DisplayDaily({
   setQuicks,
   quicksModal,
   setQuicksModal,
-  selectedDaily,
-  setSelectedDaily,
+  showModal,
+  handleClose,
+  editModal,
+  setEditModal,
+  handleShowModal,
+  user
 }) {
-  // console.log("these are the quicks", quicks);
 
-  console.log(quicks);
+  const [selectedDailyId, setSelectedDailyId] = useState(null);
 
   const today = new Date();
-  const todayDate = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate()
-  );
+  const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
   const objectsFromToday = quicks.filter((quick) => {
     const createdAtDate = new Date(quick.createdAt);
@@ -37,82 +35,13 @@ export default function DisplayDaily({
     return createdAtDateOnly.getTime() === todayDate.getTime();
   });
 
-
-  async function updateDailyOnServer(updatedDaily) {
-    try {
-      await axios.put(
-        `${process.env.REACT_APP_BACKEND_URL}/dailies/${updatedDaily._id}`,
-        updatedDaily,
-        {
-          Headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-      await fetchQuicksData();
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  function handleButtonClick(id) {
-    setSelectedDaily(id);
-    setQuicksModal(true);
-    // console.log(id)
-    // setQuicks({
-    //   water: id.water,
-    //   mood: id.mood,
-    //   sleep: id.sleep,
-    //   quote: id.quote
-    // })
-    console.log(quicks)
-  }
-
-  // const { editExpense, getBudgets, getExpenses, expenses } = useBudgets() 
-
-    // useEffect(() => {
-        // Function to fetch expense details and populate form fields
-        async function populateFormFields(dailyCheck, index) {
-            try {
-                const dailyToEdit = quicks.find(daily => dailyCheck.id === index);
-
-                if (dailyToEdit) {
-                    dailyCheck.water.current.value = dailyToEdit.description;
-                    amountRef.current.value = dailyToEdit.amount;
-                }
-            } catch (error) {
-                console.error(error)
-            }
-        }
-
-        // Call the function to populate form fields when the modal is shown
-        if (show) {
-            populateFormFields()
-        }
-    // }, [show, expenseId, expenses])
-
-  function handleDailyChange(id) {
-    const updatedDailies = [...quicks]
-    const daily = updatedDailies.find(daily => daily._id === id)
-    console.log(daily)
-  }
-
-  async function deleteDaily(dailyId, index) {
-    console.log(dailyId)
-    try {
-      await axios.delete(
-        `${process.env.REACT_APP_BACKEND_URL}/dailies/${dailyId}`
-      );
-      deleteCompletedDaily(index);
-      await fetchQuicksData()
-    } catch (e) {
-      console.error(e);
-    }
-  }
-
-  function deleteCompletedDaily(index) {
-    const updatedDailies = quicks.filter((idx) => index !== idx);
-    setQuicksModal(updatedDailies);
+  async function deleteDaily(selectedDailyId) {
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/dailies/${selectedDailyId}`)
+        .then(() => {
+            setQuicks(quicks.filter(daily => daily._id !== selectedDailyId))
+            fetchQuicksData()
+        })
+        .catch(error => console.error("Error deleting expense", error))
   }
 
   return (
@@ -123,57 +52,57 @@ export default function DisplayDaily({
       ) : (
         <>
           {objectsFromToday.map((dailyCheck, index) => (
-            <Container key={index} className="d-flex">
+            <Container key={dailyCheck._id} className="d-flex">
               <p className="p-2">
                 <strong>Water:</strong>{" "}
-                {dailyCheck.water === 0.5 ? (
+                {dailyCheck.water === "0.5" ? (
                   <>
-                    <BsDroplet />
+                    💧
                   </>
-                ) : dailyCheck.water === 1 ? (
+                ) : dailyCheck.water === "1" ? (
                   <>
-                    <BsDroplet />
-                    <BsDroplet />
+                    💧
+                    💧
                   </>
-                ) : dailyCheck.water === 1.5 ? (
+                ) : dailyCheck.water === "1.5" ? (
                   <>
-                    <BsDroplet />
-                    <BsDroplet />
-                    <BsDroplet />
+                    💧
+                    💧
+                    💧
                   </>
-                ) : dailyCheck.water === 2 ? (
+                ) : dailyCheck.water === "2" ? (
                   <>
-                    <BsDroplet />
-                    <BsDroplet />
-                    <BsDroplet />
-                    <BsDroplet />
+                    💧
+                    💧
+                    💧
+                    💧
                   </>
                 ) : null}
               </p>
               <p className="p-2">Mood: {dailyCheck.mood}</p>
               <p className="p-2">
                 Sleep:{" "}
-                {dailyCheck.sleep === 1 ? (
+                {dailyCheck.sleep === "0-4" ? (
                   <>
-                    <FaRegMoon />
+                    🌙
                   </>
-                ) : dailyCheck.sleep === 2 ? (
+                ) : dailyCheck.sleep === "4-6" ? (
                   <>
-                    <FaRegMoon />
-                    <FaRegMoon />
+                    🌙
+                    🌙
                   </>
-                ) : dailyCheck.sleep === 3 ? (
+                ) : dailyCheck.sleep === "6-8" ? (
                   <>
-                    <FaRegMoon />
-                    <FaRegMoon />
-                    <FaRegMoon />
+                    🌙
+                    🌙
+                    🌙
                   </>
-                ) : dailyCheck.sleep === 4 ? (
+                ) : dailyCheck.sleep === "8+" ? (
                   <>
-                    <FaRegMoon />
-                    <FaRegMoon />
-                    <FaRegMoon />
-                    <FaRegMoon />
+                    🌙
+                    🌙
+                    🌙
+                    🌙
                   </>
                 ) : null}
               </p>
@@ -190,7 +119,8 @@ export default function DisplayDaily({
                   marginTop: "8px",
                 }}
                 onClick={() => {
-                  handleButtonClick(dailyCheck);
+                  handleShowModal(setEditModal)
+                  setSelectedDailyId(dailyCheck._id)
                 }}
               >
                 <CiEdit />
@@ -207,7 +137,7 @@ export default function DisplayDaily({
                   marginTop: "8px",
                   marginLeft: "5px",
                 }}
-                onClick={() => deleteDaily(dailyCheck._id, index)}
+                onClick={() => deleteDaily(dailyCheck._id)}
               >
                 <MdDeleteOutline />
               </Button>
@@ -216,22 +146,16 @@ export default function DisplayDaily({
         </>
       )}
 
-<Modal show={quicksModal} onHide={() => setQuicksModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Edit Daily Check</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {selectedDaily && (
-            <>
-              {/* Render details of the selected daily check in the modal */}
-              <p>Water: {selectedDaily.water}</p>
-              <p>Mood: {selectedDaily.mood}</p>
-              <p>Sleep: {selectedDaily.sleep}</p>
-              <p>Quote: {selectedDaily.quote}</p>
-            </>
-          )}
-        </Modal.Body>
-      </Modal>
+      <EditDaily
+        showModal={editModal}
+        handleClose={() => handleClose(setEditModal)}
+        user={user}
+        fetchQuicksData={fetchQuicksData}
+        selectedDailyId={selectedDailyId}
+        setSelectedDailyId={setSelectedDailyId}
+        quicks={quicks}
+        setQuicks={setQuicks}
+      />
     </div>
   );
 }
