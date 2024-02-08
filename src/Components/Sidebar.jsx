@@ -39,13 +39,19 @@ export default function Sidebar({ handleLogout, user }) {
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/dailies">
-              <CDBSidebarMenuItem icon="calendar-plus">All Daily's</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="calendar-plus">
+                All Daily's
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/todos">
-              <CDBSidebarMenuItem icon="calendar-check">To Do's</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="calendar-check">
+                To Do's
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink>
-              <CDBSidebarMenuItem icon="calendar-week">Schedule</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="calendar-week">
+                Schedule
+              </CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
