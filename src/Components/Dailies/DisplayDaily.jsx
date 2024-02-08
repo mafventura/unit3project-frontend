@@ -6,7 +6,7 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 
 export default function DisplayDaily({ fetchQuicksData, quicks }) {
-  console.log("these are the quicks", quicks);
+  // console.log("these are the quicks", quicks);
 
   const today = new Date();
   const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
@@ -21,7 +21,7 @@ export default function DisplayDaily({ fetchQuicksData, quicks }) {
     return createdAtDateOnly.getTime() === todayDate.getTime();
   });
 
-  console.log(objectsFromToday);
+  // console.log(objectsFromToday);
   return (
     <div>
       <h6>Daily Checks</h6>
