@@ -18,7 +18,6 @@ import { useToDos } from "./context/ToDosContext";
 function App() {
   const { todos, setTodos, fetchData } = useToDos();
   const { user, setUser, getUser, handleLogout } = useUser();
-  const [selectedDaily, setSelectedDaily] = useState(null);
 
   const [quicks, setQuicks] = useState([
     {
@@ -81,8 +80,6 @@ function App() {
                   quicks={quicks}
                   setQuicks={setQuicks}
                   fetchQuicksData={fetchQuicksData}
-                  selectedDaily={selectedDaily}
-                  setSelectedDaily={setSelectedDaily}
                 />
               }
             />
