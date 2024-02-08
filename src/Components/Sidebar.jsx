@@ -8,32 +8,29 @@ import {
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import AllToDos from "./todos/YearsAndMonthToDos";
-import { Routes, Route } from "react-router-dom";
+import { CiLogout } from "react-icons/ci";
 
 export default function Sidebar({ handleLogout, user }) {
   return (
-    <div
-      style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
-    >
-      <CDBSidebar textColor="#fff" backgroundColor="#3C7D54">
+    <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
+      <CDBSidebar textColor="#F4F4F1" backgroundColor="#3C7D54">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a
-            href="/"
-            className="text-decoration-none"
-            style={{ color: "inherit" }}
-          >
-            JOURNEY
-          </a>
-          <p
-            style={{
-              color: "rgb(233,237,200,0.7)",
-              margin: "5px 0 0",
-              fontFamily: "fantasy",
-            }}
-          >
-            Hello, {user?.given_name}
-          </p>
+          <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
+            <img
+              src={"https://i.imgur.com/xlUSgOl.png"}
+              alt=""
+              style={{ width: "180px", marginLeft: '-20px' }}
+            />
+            <p
+              style={{
+                color: "#F4F4F1",
+                margin: "5px 0 0",
+                fontFamily: "PT Serif, serif",
+              }}
+            >
+              Hello, {user?.given_name}
+            </p>
+          </div>
         </CDBSidebarHeader>
 
         <CDBSidebarContent className="sidebar-content">
@@ -70,7 +67,7 @@ export default function Sidebar({ handleLogout, user }) {
                 borderRadius: "0",
               }}
             >
-              logout
+              <CiLogout style={{ marginRight: "5px" }} />
             </Button>
           </div>
         </CDBSidebarFooter>
