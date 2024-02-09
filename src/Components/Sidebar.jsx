@@ -60,7 +60,7 @@ export default function Sidebar({ handleLogout, user }) {
                 All To Do's
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/schedule" activeClassName="active">
+            <NavLink to="/schedule" className={location.pathname === '/todos' ? 'active' : ''}>
               <CDBSidebarMenuItem icon="calendar-week">
                 Schedule
               </CDBSidebarMenuItem>

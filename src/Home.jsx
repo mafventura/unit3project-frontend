@@ -83,7 +83,7 @@ export default function Home({
     <div className="d-flex flex-grow-1">
       <Container className="d-flex flex-column justify-content-evenly">
         <Container className="QUOTE d-flex flex-column align-items-center">
-          <p>Your Quote of the Day:</p>
+          <p style={{ color: "#3a7e54"}}>Your Quote of the Day</p>
           <h1 className="fst-italic text-center">"{getQuote()}"</h1>
         </Container>
         <Container className="BUTTONS d-flex justify-content-center">
@@ -117,7 +117,7 @@ export default function Home({
 
         <Container className="d-flex flex-row justify-content-center">
           <Container className="d-flex flex-column align-items-center">
-            <p className="text-decoration-underline">Today's To-do's:</p>
+            <p style={{ color: "#3a7e54"}}>Today's To-do's</p>
             <DisplayToDo
               todos={todos}
               setTodos={setTodos}
@@ -126,7 +126,7 @@ export default function Home({
             />
           </Container>
           <Container className="d-flex flex-column align-items-center">
-            <p className="text-decoration-underline">Today's Schedule:</p>
+            <p style={{ color: "#3a7e54"}}>Today's Schedule</p>
             <DisplaySchedule
               showModal={editSchedule}
               handleClose={() => handleCloseModal(setEditSchedule)}
@@ -137,7 +137,7 @@ export default function Home({
           </Container>
         </Container>
         <Container className="QUICK d-flex flex-column align-items-center">
-          <p className="text-decoration-underline">Today's Daily Check:</p>
+          <p style={{ color: "#3a7e54"}}>Today's Daily Check</p>
           <DisplayDaily
             fetchQuicksData={fetchQuicksData}
             quicks={quicks}

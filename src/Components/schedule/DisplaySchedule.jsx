@@ -64,7 +64,7 @@ export default function DisplaySchedule({
                             <CiEdit />
                         </Button> */}
                         <Button
-                            variant="outline-secondary"
+                            variant="outline-success"
                             size="sm"
                             onClick={() => deleteSchedule(element._id, index)}
                         >

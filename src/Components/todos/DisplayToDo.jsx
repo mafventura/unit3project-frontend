@@ -22,9 +22,6 @@ export default function DisplayToDo({  setTodos, deleteCompletedTodo }) {
 
   return (
     <div
-      style={{
-        maxWidth: "50%",
-      }}
     >
       {todosFromToday.map((todo, index) => (
         <InputGroup className="mb-3" key={index}>
@@ -39,7 +36,7 @@ export default function DisplayToDo({  setTodos, deleteCompletedTodo }) {
             onChange={(e) => handleInputChange(todo._id, e.target.value)}
           />
           <Button 
-            variant="outline-secondary" 
+            variant="outline-success" 
             size="sm" 
             onClick={() => deleteTodo(todo._id, index)}
           >
