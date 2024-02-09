@@ -37,7 +37,7 @@ const Quicks = ({
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title style={{ color: "#3a7e54", fontSize: 40 }}>
-          Dailies
+          New Daily Check
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

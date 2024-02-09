@@ -45,7 +45,7 @@ export default function Schedule({ showModal, handleClose }) {
     <Modal show={showModal} onHide={handleClose}>
   <Form onSubmit={addSchedule}>
     <Modal.Header closeButton>
-      <Modal.Title>Add Event to Schedule</Modal.Title>
+    <Modal.Title style={{ color: "#3a7e54", fontSize: 40 }}>New Event</Modal.Title>
     </Modal.Header>
     <Modal.Body>
       <Form.Group className="mb-3" controlId="description">

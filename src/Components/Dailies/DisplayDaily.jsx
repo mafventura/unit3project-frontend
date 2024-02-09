@@ -49,7 +49,7 @@ export default function DisplayDaily({
           {objectsFromToday.map((dailyCheck, index) => (
             <Container key={dailyCheck._id} className="d-flex">
               <p className="p-2">
-                Water:{" "}
+                <strong>Water:</strong>{" "}
                 {dailyCheck.water === "0.5" ? (
                   <>
                     💧 (0.5 litre)
@@ -77,9 +77,9 @@ export default function DisplayDaily({
                   </>
                 ) : null}
               </p>
-              <p className="p-2">Mood: {dailyCheck.mood}</p>
+              <p className="p-2"><strong>Mood:</strong> {dailyCheck.mood}</p>
               <p className="p-2">
-                Sleep:{" "}
+                <strong>Sleep:</strong>{" "}
                 {dailyCheck.sleep === "0-4" ? (
                   <>
                     🌙 (0 to 4 hours)

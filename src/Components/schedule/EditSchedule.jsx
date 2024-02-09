@@ -8,14 +8,10 @@ import "@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css";
 import { useSchedule } from "../../context/ScheduleContext";
 import { useUser } from "../../context/UserContext";
 
-// type ValuePiece = Date | string | null;
-
-// type Value = ValuePiece | [ValuePiece, ValuePiece];
-
 export default function Schedule({ showModal, handleClose, selectedScheduleId }) {
 
     const { newSchedule, schedule, handleChangeCreate, getSchedule, editSchedule } = useSchedule()
-    const { user } = useUser();
+    // const { user } = useUser();
 
     const dateRef = useRef()
     const timeRef = useRef()
