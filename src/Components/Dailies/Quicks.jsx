@@ -11,7 +11,7 @@ const Quicks = ({
   selectedDaily,
   setSelectedDaily,
 }) => {
- 
+
   const {
     hydrationLevel,
     handleHydrationChange,
@@ -21,10 +21,8 @@ const Quicks = ({
     handleSleepChange,
     quote,
     handleQuoteChange,
-    createDaily
-  } = useDailies()
-
-
+    createDaily,
+  } = useDailies();
 
   useEffect(() => {
     const stateToSave = {
@@ -125,7 +123,7 @@ const Quicks = ({
           variant="primary"
           onClick={() => {
             createDaily();
-            handleClose()
+            handleClose();
             fetchQuicksData();
           }}
           style={{ backgroundColor: "#3a7e54", borderColor: "#3a7e54" }}

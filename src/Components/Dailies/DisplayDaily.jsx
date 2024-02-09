@@ -7,6 +7,7 @@ import EditDaily from "./EditDaily"
 import { useState, useEffect } from "react";
 import { useDailies } from "../../context/DailiesContext";
 
+
 export default function DisplayDaily({
   fetchQuicksData,
   quicks,

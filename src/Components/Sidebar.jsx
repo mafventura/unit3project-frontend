@@ -6,22 +6,32 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { CiLogout } from "react-icons/ci";
 
 export default function Sidebar({ handleLogout, user }) {
+
   const location = useLocation();
+
+  const pathname = location.pathname;
+  const parts = pathname.split('/')
+  const capitalizedParts = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1))
+  const formattedPath = capitalizedParts.join(' ')
+  console.log(formattedPath)
+
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
       <CDBSidebar textColor="#F4F4F1" backgroundColor="#3C7D54">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
+            <Link to='/'>
             <img
               src={"https://i.imgur.com/xlUSgOl.png"}
               alt=""
               style={{ width: "180px", marginLeft: '-20px' }}
             />
+            </Link>
             <p
               style={{
                 color: "#F4F4F1",

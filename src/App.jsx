@@ -16,6 +16,7 @@ function App() {
   const { quicks, setQuicks, fetchQuicksData } = useDailies()
 
 
+
   useEffect(() => {
     getUser();
   }, []);
