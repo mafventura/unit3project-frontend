@@ -11,6 +11,7 @@ export function useToDos() {
 export function ToDosProvider({ children }) {
   const { user } = useUser();
   const [groupedTodos, setGroupedTodos] = useState({});
+  
   const [todos, setTodos] = useState([
     {
       todo: "",
