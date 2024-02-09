@@ -49,13 +49,13 @@ export default function Home({
     if (user?.email) {
       fetchData();
     }
-  });
+  }, [user]);
 
   useEffect(() => {
     if (user?.email) {
       fetchQuicksData();
     }
-  });
+  }, [user]);
 
   function getQuote() {
     const today = new Date();
