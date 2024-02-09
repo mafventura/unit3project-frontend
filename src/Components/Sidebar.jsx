@@ -18,7 +18,6 @@ export default function Sidebar({ handleLogout, user }) {
   const parts = pathname.split('/')
   const capitalizedParts = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1))
   const formattedPath = capitalizedParts.join(' ')
-  console.log(formattedPath)
 
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
