@@ -36,7 +36,7 @@ const ToDoList = ({
   return (
     <Modal show={showModal} onHide={handleClose}>
       <Modal.Header closeButton>
-        <Modal.Title>To-Do</Modal.Title>
+        <Modal.Title style={{ color: "#3a7e54", fontSize: 40 }}>New To-Do</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
