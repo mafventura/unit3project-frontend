@@ -1,4 +1,4 @@
-import { Container, Accordion, InputGroup, Form, Button } from "react-bootstrap";
+import { Accordion, InputGroup, Form, Button } from "react-bootstrap";
 import { useEffect } from "react";
 import { useToDos } from "../../context/ToDosContext";
 
@@ -6,7 +6,6 @@ export default function AllTodosInDays({ year, month, days }) {
   const {
     handleCheckboxChange,
     handleInputChange,
-    groupedTodos,
     setGroupedTodos,
     groupTodosByYear,
     sortMonthsAndDays,
@@ -16,12 +15,14 @@ export default function AllTodosInDays({ year, month, days }) {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     const groupedByYear = groupTodosByYear(todos);
     const sortedYears = sortMonthsAndDays(groupedByYear);
     setGroupedTodos(sortedYears);
+    // eslint-disable-next-line
   }, [todos]);
 
   return (

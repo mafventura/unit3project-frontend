@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useRef, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import DatePicker from "react-datepicker";
@@ -6,7 +5,6 @@ import TimeRangePicker from "@wojtekmaj/react-timerange-picker";
 import "react-datepicker/dist/react-datepicker.css";
 import "@wojtekmaj/react-timerange-picker/dist/TimeRangePicker.css";
 import { useSchedule } from "../../context/ScheduleContext";
-import { useUser } from "../../context/UserContext";
 
 export default function Schedule({ showModal, handleClose, selectedScheduleId }) {
 

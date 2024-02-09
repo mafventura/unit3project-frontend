@@ -1,5 +1,4 @@
 import {InputGroup, Form, Button} from "react-bootstrap";
-import axios from "axios";
 import { useToDos } from "../../context/ToDosContext";
 import { useEffect } from "react";
 
@@ -18,6 +17,7 @@ export default function DisplayToDo({  setTodos, deleteCompletedTodo }) {
 
     useEffect(() => {
       fetchData()
+      // eslint-disable-next-line
     }, [])
 
   return (

@@ -49,12 +49,14 @@ export default function Home({
     if (user?.email) {
       fetchData();
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   useEffect(() => {
     if (user?.email) {
       fetchQuicksData();
     }
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   function getQuote() {

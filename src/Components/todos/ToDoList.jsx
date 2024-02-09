@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Modal, Button, InputGroup, Form } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 import NewToDoForm from "./NewToDoForm";
 import ToDoListItem from "./ToDoListItem";
 import { useToDos } from "../../context/ToDosContext";
@@ -9,14 +8,14 @@ const ToDoList = ({
   handleClose,
   user,
   todos,
-  setTodos,
   fetchData,
   deleteCompletedTodo,
 }) => {
 
 
   const { completedTodo } = useToDos()
-
+  
+// eslint-disable-next-line
   const toDoListItems = todos.map((todo, idx) => {
     // console.log(todo);
     if (todo.todo !== "") {

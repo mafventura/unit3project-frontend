@@ -7,12 +7,10 @@ import "./App.css";
 import Home from "./Home";
 import YearsAndMonthDailies from "./Components/Dailies/YearsAndMonthDailies";
 import { useUser } from "./context/UserContext";
-import { useToDos } from "./context/ToDosContext";
 import { useDailies } from "./context/DailiesContext";
 import YearsAndMonthSchedule from "./Components/schedule/YearsAndMonthSchedule";
 
 function App() {
-  const { todos, fetchData } = useToDos();
   const { user, setUser, getUser, handleLogout } = useUser();
   const { quicks, setQuicks, fetchQuicksData } = useDailies()
 
@@ -20,6 +18,7 @@ function App() {
 
   useEffect(() => {
     getUser();
+    //eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
 

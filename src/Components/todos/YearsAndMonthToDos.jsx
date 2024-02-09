@@ -17,12 +17,14 @@ export default function YearsAndMonthToDos() {
 
   useEffect(() => {
     fetchData();
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
     const groupedByYear = groupTodosByYear(todos);
     const sortedYears = sortMonthsAndDays(groupedByYear);
     setGroupedTodos(sortedYears);
+    // eslint-disable-next-line
   }, [todos]);
 
   return (

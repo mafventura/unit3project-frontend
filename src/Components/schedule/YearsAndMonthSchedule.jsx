@@ -13,7 +13,7 @@ export default function YearsAndMonthSchedule() {
     const groupedSchedule = sortedSchedule.reduce((acc, element) => {
         const createdAtDate = new Date(element.date);
         const year = createdAtDate.getFullYear();
-        const month = createdAtDate.getMonth();
+        // const month = createdAtDate.getMonth();
         const monthName = createdAtDate.toLocaleString("default", {
             month: "long",
         });
@@ -38,6 +38,7 @@ export default function YearsAndMonthSchedule() {
 
     useEffect(() => {
         getSchedule();
+        // eslint-disable-next-line
     }, []);
 
     return (

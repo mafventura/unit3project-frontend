@@ -6,18 +6,12 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
-import { NavLink, useLocation, Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { CiLogout } from "react-icons/ci";
 
 export default function Sidebar({ handleLogout, user }) {
 
-  const location = useLocation();
-
-  const pathname = location.pathname;
-  const parts = pathname.split('/')
-  const capitalizedParts = parts.map(part => part.charAt(0).toUpperCase() + part.slice(1))
-  const formattedPath = capitalizedParts.join(' ')
 
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
@@ -46,20 +40,20 @@ export default function Sidebar({ handleLogout, user }) {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink to="/" className={location.pathname === '/' ? 'active' : ''}  >
+            <NavLink to="/"  >
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/dailies" className={location.pathname === '/dailies' ? 'active' : ''}>
+            <NavLink to="/dailies">
               <CDBSidebarMenuItem icon="calendar-plus">
                 All Daily's
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/todos" className={location.pathname === '/todos' ? 'active' : ''}>
+            <NavLink to="/todos">
               <CDBSidebarMenuItem icon="calendar-check">
                 All To Do's
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/schedule" className={location.pathname === '/todos' ? 'active' : ''}>
+            <NavLink to="/schedule">
               <CDBSidebarMenuItem icon="calendar-week">
                 Schedule
               </CDBSidebarMenuItem>

@@ -13,7 +13,7 @@ export default function YearsAndMonthDailies() {
   const groupedDailies = sortedDailies.reduce((acc, quick) => {
     const createdAtDate = new Date(quick.createdAt);
     const year = createdAtDate.getFullYear();
-    const month = createdAtDate.getMonth();
+    // const month = createdAtDate.getMonth();
     const monthName = createdAtDate.toLocaleString("default", {
       month: "long",
     });
@@ -38,6 +38,7 @@ export default function YearsAndMonthDailies() {
 
   useEffect(() => {
     fetchQuicksData();
+    // eslint-disable-next-line
   }, []);
 
   return (

@@ -1,8 +1,6 @@
 import { Container, Accordion } from "react-bootstrap";
-import { useDailies } from "../../context/DailiesContext";
 
 export default function AllDailiesInDays({ dates, year, month }) {
-  const { handleQuoteChange } = useDailies();
   return (
     <>
       <Accordion>

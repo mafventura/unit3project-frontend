@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import { Button, Container } from 'react-bootstrap'
 import { useUser } from '../context/UserContext'
 
