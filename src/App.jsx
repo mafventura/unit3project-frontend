@@ -9,6 +9,7 @@ import YearsAndMonthDailies from "./Components/Dailies/YearsAndMonthDailies";
 import { useUser } from "./context/UserContext";
 import { useToDos } from "./context/ToDosContext";
 import { useDailies } from "./context/DailiesContext";
+import YearsAndMonthSchedule from "./Components/schedule/YearsAndMonthSchedule";
 
 function App() {
   const { todos, fetchData } = useToDos();
@@ -29,9 +30,15 @@ function App() {
           <Sidebar user={user} handleLogout={handleLogout} />
           <Routes>
             <Route
+              path="/schedule"
+              element={
+                <YearsAndMonthSchedule />
+              }
+            />
+            <Route
               path="/todos"
               element={
-                <YearsAndMonthToDos/>
+                <YearsAndMonthToDos />
               }
             />
             <Route

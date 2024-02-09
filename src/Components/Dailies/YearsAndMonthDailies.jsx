@@ -41,7 +41,8 @@ export default function YearsAndMonthDailies() {
   }, []);
 
   return (
-    <div className="d-flex" style={{ width: "100%" }}>
+    <div className="d-flex flex-column align-items-center" style={{ width: "100%" }}>
+      <h1 className="p-3 mt-3" style={{ color: "#3a7e54", fontSize: 40}}>All Daily Checks</h1>
       <Container className="d-flex flex-column">
         <div className="mt-5" style={{ width: "100%" }}>
           {Object.entries(groupedDailies).map(([year, months]) => (

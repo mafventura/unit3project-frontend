@@ -24,7 +24,8 @@ export default function YearsAndMonthToDos() {
   }, [todos]);
 
   return (
-    <div className="d-flex" style={{ width: "100%" }}>
+    <div className="d-flex flex-column align-items-center" style={{ width: "100%" }}>
+      <h1 className="p-3 mt-3" style={{ color: "#3a7e54", fontSize: 40}}>All To-Do's</h1>
       <Container className="d-flex flex-column">
         {Object.entries(groupedTodos).length === 0 ? (
           <div className="mt-5">
