@@ -14,14 +14,11 @@ import YearsAndMonthSchedule from "./Components/schedule/YearsAndMonthSchedule";
 function App() {
   const { todos, fetchData } = useToDos();
   const { user, setUser, getUser, handleLogout } = useUser();
-  const { quicks, setQuicks, fetchQuicksData } = useDailies()
-
-
+  const { quicks, setQuicks, fetchQuicksData } = useDailies();
 
   useEffect(() => {
     getUser();
   }, []);
-
 
   return (
     <>
@@ -29,22 +26,15 @@ function App() {
         <div className="d-flex">
           <Sidebar user={user} handleLogout={handleLogout} />
           <Routes>
-            <Route
-              path="/schedule"
-              element={
-                <YearsAndMonthSchedule />
-              }
-            />
-            <Route
-              path="/todos"
-              element={
-                <YearsAndMonthToDos />
-              }
-            />
+            <Route path="/schedule" element={<YearsAndMonthSchedule />} />
+            <Route path="/todos" element={<YearsAndMonthToDos />} />
             <Route
               path="/dailies"
               element={
-                <YearsAndMonthDailies fetchQuicksData={fetchQuicksData} quicks={quicks} />
+                <YearsAndMonthDailies
+                  fetchQuicksData={fetchQuicksData}
+                  quicks={quicks}
+                />
               }
             />
             <Route

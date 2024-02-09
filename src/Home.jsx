@@ -28,14 +28,12 @@ export default function Home({
   const { deleteCompletedTodo, todos, setTodos, fetchData } = useToDos();
 
   const options = {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    year: "numeric",
   };
-  const todayTtile = new Date().toLocaleDateString('en-GB', options);
-
-
+  const todayTtile = new Date().toLocaleDateString("en-GB", options);
 
   function handleShowModal(modalType) {
     modalType(true);
@@ -59,7 +57,11 @@ export default function Home({
 
   function getQuote() {
     const today = new Date();
-    const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    const todayDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate()
+    );
 
     const objectsFromToday = quicks.filter((quick) => {
       const createdAtDate = new Date(quick.createdAt);
@@ -72,7 +74,9 @@ export default function Home({
     });
 
     if (objectsFromToday.length > 0) {
-      objectsFromToday.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      objectsFromToday.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
       return objectsFromToday[0].quote;
     } else {
       return "You haven't wrote your quote of the day!";
@@ -83,11 +87,15 @@ export default function Home({
     <div className="d-flex flex-grow-1">
       <Container className="d-flex flex-column justify-content-evenly">
         <Container className="QUOTE d-flex flex-column align-items-center">
-          <p style={{ color: "#3a7e54"}}>Your Quote of the Day</p>
+          <p style={{ color: "#3a7e54" }}>Your Quote of the Day</p>
           <h1 className="fst-italic text-center">"{getQuote()}"</h1>
         </Container>
         <Container className="BUTTONS d-flex justify-content-center">
-          <Button variant="success" className="m-3" onClick={() => handleShowModal(setQuicksModal)}>
+          <Button
+            variant="success"
+            className="m-3"
+            onClick={() => handleShowModal(setQuicksModal)}
+          >
             Add Daily Check
           </Button>
           <Button
@@ -112,12 +120,14 @@ export default function Home({
         <hr className="m-0 p-0" />
 
         <Container className="TODAYS d-flex justify-content-center m-0">
-          <h5><strong>{`${todayTtile}`}</strong></h5>
+          <h5>
+            <strong>{`${todayTtile}`}</strong>
+          </h5>
         </Container>
 
         <Container className="d-flex flex-row justify-content-center">
           <Container className="d-flex flex-column align-items-center">
-            <p style={{ color: "#3a7e54"}}>Today's To-do's</p>
+            <p style={{ color: "#3a7e54" }}>Today's To-do's</p>
             <DisplayToDo
               todos={todos}
               setTodos={setTodos}
@@ -126,7 +136,7 @@ export default function Home({
             />
           </Container>
           <Container className="d-flex flex-column align-items-center">
-            <p style={{ color: "#3a7e54"}}>Today's Schedule</p>
+            <p style={{ color: "#3a7e54" }}>Today's Schedule</p>
             <DisplaySchedule
               showModal={editSchedule}
               handleClose={() => handleCloseModal(setEditSchedule)}
@@ -137,7 +147,7 @@ export default function Home({
           </Container>
         </Container>
         <Container className="QUICK d-flex flex-column align-items-center">
-          <p style={{ color: "#3a7e54"}}>Today's Daily Check</p>
+          <p style={{ color: "#3a7e54" }}>Today's Daily Check</p>
           <DisplayDaily
             fetchQuicksData={fetchQuicksData}
             quicks={quicks}
@@ -171,7 +181,10 @@ export default function Home({
         fetchData={fetchData}
         deleteCompletedTodo={deleteCompletedTodo}
       />
-      <Schedule showModal={scheduleModal} handleClose={() => handleCloseModal(setScheduleModal)} />
+      <Schedule
+        showModal={scheduleModal}
+        handleClose={() => handleCloseModal(setScheduleModal)}
+      />
     </div>
   );
 }
