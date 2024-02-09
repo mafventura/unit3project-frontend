@@ -1,8 +1,8 @@
 import { Container, InputGroup, Form, Button } from "react-bootstrap";
 import { useSchedule } from "../../context/ScheduleContext";
 import { useEffect, useState } from "react";
-import { CiEdit } from "react-icons/ci";
 import EditSchedule from "./EditSchedule"
+// import { CiEdit } from "react-icons/ci";
 
 export default function DisplaySchedule({
     handleClose,
