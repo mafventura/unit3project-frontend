@@ -84,7 +84,7 @@ export default function Home({
       <Container className="d-flex flex-column justify-content-evenly">
         <Container className="QUOTE d-flex flex-column align-items-center">
           <p>Your Quote of the Day:</p>
-          <h1 className="fst-italic">"{getQuote()}"</h1>
+          <h1 className="fst-italic text-center">"{getQuote()}"</h1>
         </Container>
         <Container className="BUTTONS d-flex justify-content-center">
           <Button variant="success" className="m-3" onClick={() => handleShowModal(setQuicksModal)}>
