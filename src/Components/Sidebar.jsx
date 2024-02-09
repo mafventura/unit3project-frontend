@@ -27,9 +27,10 @@ export default function Sidebar({ handleLogout, user }) {
           <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
             <Link to='/'>
             <img
-              src={"https://i.imgur.com/xlUSgOl.png"}
+              src={"https://i.imgur.com/oVyooXT.png"}
               alt=""
-              style={{ width: "180px", marginLeft: '-20px' }}
+              style={{ width: "150px" }}
+              className="mb-2"
             />
             </Link>
             <p
