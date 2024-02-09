@@ -2,6 +2,7 @@ import { Container, Accordion } from "react-bootstrap";
 import { useEffect } from "react";
 import { useToDos } from "../../context/ToDosContext";
 import AllTodosInDays from "./AllTodosInDays";
+import { Link } from "react-router-dom";
 
 export default function YearsAndMonthToDos() {
   const {
@@ -11,6 +12,7 @@ export default function YearsAndMonthToDos() {
     sortMonthsAndDays,
     todos,
     fetchData,
+    
   } = useToDos();
 
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function YearsAndMonthToDos() {
       <Container className="d-flex flex-column">
         {Object.entries(groupedTodos).length === 0 ? (
           <div className="mt-5">
-            <p>You have nothing to Display, start creating your todo's here</p>
+            <p>You have nothing to Display, start creating your todo's by going <Link to="/" style={{textDecoration: 'none'}}>home</Link> and adding To-Do.  </p>
           </div>
         ) : (
           Object.entries(groupedTodos).map(([year, months]) => (
