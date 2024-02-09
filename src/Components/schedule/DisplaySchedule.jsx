@@ -1,9 +1,18 @@
-import { Container, InputGroup, Form } from "react-bootstrap";
+import { Container, InputGroup, Form, Button } from "react-bootstrap";
 import { useSchedule } from "../../context/ScheduleContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { CiEdit } from "react-icons/ci";
+import EditSchedule from "./EditSchedule"
 
-export default function DisplaySchedule({ setSchedule }) {
-    const { schedule, getSchedule } = useSchedule();
+export default function DisplaySchedule({
+    handleClose,
+    editSchedule,
+    setEditSchedule,
+    handleShowModal,
+}) {
+    const { schedule, getSchedule, deleteSchedule } = useSchedule();
+
+    const [selectedScheduleId, setSelectedScheduleId] = useState(null)
 
     const formatDate = (dateString) => {
         const date = new Date(dateString);
@@ -31,7 +40,7 @@ export default function DisplaySchedule({ setSchedule }) {
     }, []);
 
     return (
-        <div style={{ maxWidth: "50%" }}>
+        <div>
             {scheduleToday.map((element, index) => (
                 <Container key={index} className="d-flex">
                     <InputGroup className="mb-3">
@@ -41,10 +50,38 @@ export default function DisplaySchedule({ setSchedule }) {
                         <Form.Control
                             aria-label="Text input with checkbox"
                             value={element.event}
+                            style={{ pointerEvents: "none" }}
+                            readOnly
                         />
+                        {/* <Button
+                            variant="outline-secondary"
+                            size="sm"
+                            onClick={() => {
+                                handleShowModal(setEditSchedule)
+                                setSelectedScheduleId(element._id)
+                            }}
+                        >
+                            <CiEdit />
+                        </Button> */}
+                        <Button
+                            variant="outline-secondary"
+                            size="sm"
+                            onClick={() => deleteSchedule(element._id, index)}
+                        >
+                            x
+                        </Button>
                     </InputGroup>
                 </Container>
             ))}
+
+            <EditSchedule
+                showModal={editSchedule}
+                handleClose={() => handleClose(setEditSchedule)}
+                selectedScheduleId={selectedScheduleId}
+                setSelectedScheduleId={setSelectedScheduleId}
+                getSchedule={getSchedule}
+            />
+
         </div>
     );
 }
