@@ -106,13 +106,15 @@ export default function NewToDoForm({ fetchData, user }) {
 
   return (
     <>
-      <h2>New To-Do</h2>
+    
+      <h4 style={{ marginBottom: 20, color: "#3a7e54" }}>New To-Do</h4>
       <form onSubmit={handleAddToDo}>
-        <input
+        <input        
           type="text"
           name="todo"
           value={newToDo.todo}
           onChange={handleChange}
+          style={{ borderRadius: "8px", padding: "5px" }}
           placeholder="New To-Do"
           required
           pattern=".{3,}"
@@ -123,9 +125,16 @@ export default function NewToDoForm({ fetchData, user }) {
           value={newToDo.date}
           onChange={handleChange}
           required
-        />
-        <button type="submit">ADD</button>
+        /> 
+        <button type="submit"
+        style={{ backgroundColor: "#3a7e54", borderColor: "#3a7e54",
+         borderRadius:"8px", color: "white", marginLeft: "5px" }}
+        >
+          ADD        
+        </button>
       </form>
+     
     </>
+  
   );
 }

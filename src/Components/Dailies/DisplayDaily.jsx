@@ -1,10 +1,9 @@
 import React from "react";
-import { Container, Button, Modal } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
-import axios from "axios";
 import EditDaily from "./EditDaily"
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useDailies } from "../../context/DailiesContext";
 
 
@@ -43,7 +42,6 @@ export default function DisplayDaily({
 
   return (
     <div>
-      <h6>Daily Checks</h6>
       {objectsFromToday.length === 0 ? (
         <p>No daily checks created today.</p>
       ) : (
@@ -51,21 +49,23 @@ export default function DisplayDaily({
           {objectsFromToday.map((dailyCheck, index) => (
             <Container key={dailyCheck._id} className="d-flex">
               <p className="p-2">
-                <strong>Water:</strong>{" "}
+                Water:{" "}
                 {dailyCheck.water === "0.5" ? (
                   <>
-                    💧
+                    💧 (0.5 litre)
                   </>
                 ) : dailyCheck.water === "1" ? (
                   <>
                     💧
                     💧
+                    (1 litre)
                   </>
                 ) : dailyCheck.water === "1.5" ? (
                   <>
                     💧
                     💧
                     💧
+                    (1.5 litre)
                   </>
                 ) : dailyCheck.water === "2" ? (
                   <>
@@ -73,6 +73,7 @@ export default function DisplayDaily({
                     💧
                     💧
                     💧
+                    (2 litre)
                   </>
                 ) : null}
               </p>
@@ -81,18 +82,21 @@ export default function DisplayDaily({
                 Sleep:{" "}
                 {dailyCheck.sleep === "0-4" ? (
                   <>
-                    🌙
+                    🌙 (0 to 4 hours)
                   </>
                 ) : dailyCheck.sleep === "4-6" ? (
                   <>
                     🌙
                     🌙
+                    
+                    (4 to 6 hours)
                   </>
                 ) : dailyCheck.sleep === "6-8" ? (
                   <>
                     🌙
                     🌙
                     🌙
+                    (6 to 8 hours)
                   </>
                 ) : dailyCheck.sleep === "8+" ? (
                   <>
@@ -100,10 +104,11 @@ export default function DisplayDaily({
                     🌙
                     🌙
                     🌙
+
+                    (more than 8 hours)
                   </>
                 ) : null}
               </p>
-              <p className="p-2">Quote: {dailyCheck.quote}</p>
 
               <Button
                 size="sm"

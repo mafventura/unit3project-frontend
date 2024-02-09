@@ -10,9 +10,9 @@ export function useDailies() {
 
 export function DailiesProvider({ children }) {
   const { user } = useUser();
-  const [hydrationLevel, setHydrationLevel] = useState(""); // 1 to 4 indicating hydration level
+  const [hydrationLevel, setHydrationLevel] = useState(""); 
   const [mood, setMood] = useState("");
-  const [sleepLevel, setSleepLevel] = useState(""); // 1 to 4 indicating sleep level
+  const [sleepLevel, setSleepLevel] = useState(""); 
   const [quote, setQuote] = useState("");
 
   const [quicks, setQuicks] = useState([

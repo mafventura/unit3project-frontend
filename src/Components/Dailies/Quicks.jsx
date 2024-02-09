@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
-import axios from "axios";
 import { useDailies } from "../../context/DailiesContext";
 
 const Quicks = ({
@@ -92,10 +91,10 @@ const Quicks = ({
               style={{ borderRadius: "8px", padding: "5px" }}
             >
               <option value="">Select an option</option>
-              <option value="0-4">🌙 (0-4 hrs)</option>
-              <option value="4-6">🌙🌙 (4-6 hrs)</option>
-              <option value="6-8">🌙🌙🌙 (6-8 hrs)</option>
-              <option value="8+">🌙🌙🌙🌙 (8+ hrs)</option>
+              <option value="0-4">🌙 (0 to 4 hours)</option>
+              <option value="4-6">🌙🌙 (4 to 6 hours)</option>
+              <option value="6-8">🌙🌙🌙 (6 to 8 hours)</option>
+              <option value="8+">🌙🌙🌙🌙 (8+ hours)</option>
             </select>
           </li>
         </ul>

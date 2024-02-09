@@ -1,7 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { useDailies } from "../../context/DailiesContext";
-import axios from "axios";
 
 export default function EditDaily({
   showModal,
@@ -12,7 +11,6 @@ export default function EditDaily({
   quicks,
   setQuicks,
 }) {
-  // console.log("THIS IS THE ID", selectedDailyId);
 
   const {
     hydrationLevel,
@@ -64,7 +62,7 @@ export default function EditDaily({
     if (showModal) {
       populateFormFields();
     }
-  }, [showModal]);
+  });
 
   return (
     <Modal show={showModal} onHide={handleClose}>
@@ -87,10 +85,10 @@ export default function EditDaily({
               style={{ borderRadius: "8px", padding: "5px" }}
             >
               <option value="">Select an option</option>
-              <option value="0.5">💧</option>
-              <option value="1">💧💧</option>
-              <option value="1.5">💧💧💧</option>
-              <option value="2">💧💧💧💧</option>
+              <option value="0.5">💧 (0.5 litre)</option>
+              <option value="1">💧💧 (1 litre)</option>
+              <option value="1.5">💧💧💧 (1.5 litre)</option>
+              <option value="2">💧💧💧💧 (2 litre)</option>
             </select>
           </li>
         </ul>
@@ -127,10 +125,10 @@ export default function EditDaily({
               style={{ borderRadius: "8px", padding: "5px" }}
             >
               <option value="">Select an option</option>
-              <option value="0-4">🌙</option>
-              <option value="4-6">🌙🌙</option>
-              <option value="6-8">🌙🌙🌙</option>
-              <option value="8+">🌙🌙🌙🌙</option>
+              <option value="0-4">🌙 (0 to 4 hours)</option>
+              <option value="4-6">🌙🌙 (4 to 6 hours)</option>
+              <option value="6-8">🌙🌙🌙 (6 to 8 hours)</option>
+              <option value="8+">🌙🌙🌙🌙 (8+ hours)</option>
             </select>
           </li>
         </ul>

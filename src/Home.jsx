@@ -5,9 +5,9 @@ import ToDoList from "./Components/todos/ToDoList";
 import Schedule from "./Components/schedule/NewScheduleModal";
 import DisplayToDo from "./Components/todos/DisplayToDo";
 import DisplayDaily from "./Components/Dailies/DisplayDaily";
+import DisplaySchedule from "./Components/schedule/DisplaySchedule";
 import "./App.css";
 import { useToDos } from "./context/ToDosContext";
-
 
 export default function Home({
   user,
@@ -22,9 +22,20 @@ export default function Home({
   const [quicksModal, setQuicksModal] = useState(false);
   const [todoModal, setTodoModal] = useState(false);
   const [scheduleModal, setScheduleModal] = useState(false);
-  const [editModal, setEditModal] = useState(false)
+  const [editModal, setEditModal] = useState(false);
+  const [editSchedule, setEditSchedule] = useState(false);
 
   const { deleteCompletedTodo, todos, setTodos, fetchData } = useToDos();
+
+  const options = {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  };
+  const todayTtile = new Date().toLocaleDateString('en-GB', options);
+
+
 
   function handleShowModal(modalType) {
     modalType(true);
@@ -46,86 +57,121 @@ export default function Home({
     }
   }, [user]);
 
+  function getQuote() {
+    const today = new Date();
+    const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+
+    const objectsFromToday = quicks.filter((quick) => {
+      const createdAtDate = new Date(quick.createdAt);
+      const createdAtDateOnly = new Date(
+        createdAtDate.getFullYear(),
+        createdAtDate.getMonth(),
+        createdAtDate.getDate()
+      );
+      return createdAtDateOnly.getTime() === todayDate.getTime();
+    });
+
+    if (objectsFromToday.length > 0) {
+      objectsFromToday.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+      return objectsFromToday[0].quote;
+    } else {
+      return "You haven't wrote your quote of the day!";
+    }
+  }
+
   return (
-    <div>
-      <div className="d-flex">
-        <Container className="d-flex flex-column justify-content-center align-items-center">
-          <Container className="d-flex justify-content-center">
-            <Button
-              variant="success"
-              className="m-3"
-              onClick={() => handleShowModal(setQuicksModal)}
-            >
-              Add Daily Check
-            </Button>
-            <Button
-              variant="success"
-              className="m-3"
-              onClick={() => handleShowModal(setScheduleModal)}
-            >
-              Add Schedule
-            </Button>
-            <Button
-              variant="success"
-              className="m-3"
-              onClick={() => {
-                fetchData();
-                handleShowModal(setTodoModal);
-              }}
-            >
-              Add To-Do
-            </Button>
-          </Container>
+    <div className="d-flex flex-grow-1">
+      <Container className="d-flex flex-column justify-content-evenly">
+        <Container className="QUOTE d-flex flex-column align-items-center">
+          <p>Your Quote of the Day:</p>
+          <h1 className="fst-italic">"{getQuote()}"</h1>
+        </Container>
+        <Container className="BUTTONS d-flex justify-content-center">
+          <Button variant="success" className="m-3" onClick={() => handleShowModal(setQuicksModal)}>
+            Add Daily Check
+          </Button>
+          <Button
+            variant="success"
+            className="m-3"
+            onClick={() => handleShowModal(setScheduleModal)}
+          >
+            Add Schedule
+          </Button>
+          <Button
+            variant="success"
+            className="m-3"
+            onClick={() => {
+              fetchData();
+              handleShowModal(setTodoModal);
+            }}
+          >
+            Add To-Do
+          </Button>
+        </Container>
 
-          <Container>
-            <h5>Today's Entries</h5>
-          </Container>
+        <hr className="m-0 p-0" />
 
-          <Container>
+        <Container className="TODAYS d-flex justify-content-center m-0">
+          <h5><strong>{`${todayTtile}`}</strong></h5>
+        </Container>
+
+        <Container className="d-flex flex-row justify-content-center">
+          <Container className="d-flex flex-column align-items-center">
+            <p className="text-decoration-underline">Today's To-do's:</p>
             <DisplayToDo
               todos={todos}
               setTodos={setTodos}
               fetchData={fetchData}
               deleteCompletedTodo={deleteCompletedTodo}
             />
-            <DisplayDaily
-              fetchQuicksData={fetchQuicksData}
-              quicks={quicks}
-              setQuicks={setQuicks}
-              quicksModal={quicksModal}
-              setQuicksModal={setQuicksModal}
-              selectedDaily={selectedDaily}
-              setSelectedDaily={setSelectedDaily}
-              showModal={editModal}
-              handleClose={() => handleCloseModal(setEditModal)}
-              editModal={editModal}
-              setEditModal={setEditModal}
-              handleShowModal={() => handleShowModal(setEditModal)}
+          </Container>
+          <Container className="d-flex flex-column align-items-center">
+            <p className="text-decoration-underline">Today's Schedule:</p>
+            <DisplaySchedule
+              showModal={editSchedule}
+              handleClose={() => handleCloseModal(setEditSchedule)}
+              editSchedule={editSchedule}
+              setEditSchedule={setEditSchedule}
+              handleShowModal={() => handleShowModal(setEditSchedule)}
             />
           </Container>
         </Container>
-        <Quicks
-          showModal={quicksModal}
-          handleClose={() => handleCloseModal(setQuicksModal)}
-          user={user}
-          fetchQuicksData={fetchQuicksData}
-          selectedDaily={selectedDaily}
-          setSelectedDaily={selectedDaily}
-        />
-        <ToDoList
-          showModal={todoModal}
-          handleClose={() => handleCloseModal(setTodoModal)}
-          user={user}
-          todos={todos}
-          setTodos={setTodos}
-          fetchData={fetchData}
-          deleteCompletedTodo={deleteCompletedTodo}
-        />
-        <Schedule
-          showModal={scheduleModal}
-          handleClose={() => handleCloseModal(setScheduleModal)}
-        />
-      </div>
+        <Container className="QUICK d-flex flex-column align-items-center">
+          <p className="text-decoration-underline">Today's Daily Check:</p>
+          <DisplayDaily
+            fetchQuicksData={fetchQuicksData}
+            quicks={quicks}
+            setQuicks={setQuicks}
+            quicksModal={quicksModal}
+            setQuicksModal={setQuicksModal}
+            selectedDaily={selectedDaily}
+            setSelectedDaily={setSelectedDaily}
+            showModal={editModal}
+            handleClose={() => handleCloseModal(setEditModal)}
+            editModal={editModal}
+            setEditModal={setEditModal}
+            handleShowModal={() => handleShowModal(setEditModal)}
+          />
+        </Container>
+      </Container>
+      <Quicks
+        showModal={quicksModal}
+        handleClose={() => handleCloseModal(setQuicksModal)}
+        user={user}
+        fetchQuicksData={fetchQuicksData}
+        selectedDaily={selectedDaily}
+        setSelectedDaily={selectedDaily}
+      />
+      <ToDoList
+        showModal={todoModal}
+        handleClose={() => handleCloseModal(setTodoModal)}
+        user={user}
+        todos={todos}
+        setTodos={setTodos}
+        fetchData={fetchData}
+        deleteCompletedTodo={deleteCompletedTodo}
+      />
+      <Schedule showModal={scheduleModal} handleClose={() => handleCloseModal(setScheduleModal)} />
     </div>
   );
 }
