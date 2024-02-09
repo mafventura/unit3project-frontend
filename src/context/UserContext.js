@@ -10,38 +10,39 @@ export function useUser() {
 export function UsersProvider({ children }) {
   const [user, setUser] = useState(null);
 
+  const googleAuth = useCallback(() => {
+    window.open(
+      `${process.env.REACT_APP_AUTH_URL}/auth/google/callback`,
+      "_self"
+    );
+  }, []);
+
   async function getUser() {
     try {
       const url = `${process.env.REACT_APP_AUTH_URL}/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
-      console.log(data.user._json)
+      console.log(data.user._json);
       setUser(data.user._json);
     } catch (e) {
       console.error(e);
     }
   }
 
-  const googleAuth = useCallback(() => {
-    window.open(
-        `${process.env.REACT_APP_AUTH_URL}/auth/google/callback`,
-        '_self'
-    )
-}, [])
-
   const handleLogout = async () => {
     window.open(`${process.env.REACT_APP_AUTH_URL}/auth/logout`, "_self");
   };
 
   return (
-    <UserContext.Provider value={{
+    <UserContext.Provider
+      value={{
         user,
         setUser,
         getUser,
         handleLogout,
-        googleAuth
-    }}
+        googleAuth,
+      }}
     >
-        {children}
+      {children}
     </UserContext.Provider>
-    );
+  );
 }
