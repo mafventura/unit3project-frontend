@@ -12,7 +12,7 @@ export function UsersProvider({ children }) {
 
   async function getUser() {
     try {
-      const url = `${process.env.REACT_APP_BACKEND_URL}/auth/login/success`;
+      const url = `${process.env.REACT_APP_AUTH_URL}/auth/login/success`;
       const { data } = await axios.get(url, { withCredentials: true });
 
       setUser(data?.user?._json);
@@ -23,13 +23,13 @@ export function UsersProvider({ children }) {
 
   const googleAuth = useCallback(() => {
     window.open(
-        `${process.env.REACT_APP_BACKEND_URL}/auth/google/callback`,
+        `${process.env.REACT_APP_AUTH_URL}/auth/google/callback`,
         '_self'
     )
 }, [])
 
   const handleLogout = async () => {
-    window.open(`${process.env.REACT_APP_BACKEND_URL}/auth/logout`, "_self");
+    window.open(`${process.env.REACT_APP_AUTH_URL}/auth/logout`, "_self");
   };
 
   return (
