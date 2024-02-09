@@ -10,7 +10,7 @@ const Quicks = ({
   selectedDaily,
   setSelectedDaily,
 }) => {
- 
+
   const {
     hydrationLevel,
     handleHydrationChange,
@@ -20,10 +20,8 @@ const Quicks = ({
     handleSleepChange,
     quote,
     handleQuoteChange,
-    createDaily
-  } = useDailies()
-
-
+    createDaily,
+  } = useDailies();
 
   useEffect(() => {
     const stateToSave = {
@@ -56,8 +54,8 @@ const Quicks = ({
               <option value="">Select an option</option>
               <option value="0.5">💧 (0.5 litre)</option>
               <option value="1">💧💧 (1 litre)</option>
-              <option value="1.5">💧💧💧 (1.5 litre)</option>
-              <option value="2">💧💧💧💧 (2 litre)</option>
+              <option value="1.5">💧💧💧 (1.5 litres)</option>
+              <option value="2">💧💧💧💧 (2litres)</option>
             </select>
           </li>
         </ul>
@@ -124,7 +122,7 @@ const Quicks = ({
           variant="primary"
           onClick={() => {
             createDaily();
-            handleClose()
+            handleClose();
             fetchQuicksData();
           }}
           style={{ backgroundColor: "#3a7e54", borderColor: "#3a7e54" }}

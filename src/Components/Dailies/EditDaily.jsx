@@ -72,7 +72,7 @@ export default function EditDaily({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        {/* Add some styles to the lists */}
+
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginBottom: 20, color: "#3a7e54" }}>
@@ -93,8 +93,6 @@ export default function EditDaily({
           </li>
         </ul>
 
-        {/* </Tab> */}
-        {/* <Tab eventKey="mood" title="Mood"> */}
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
@@ -114,8 +112,7 @@ export default function EditDaily({
             </select>
           </li>
         </ul>
-        {/* </Tab> */}
-        {/* <Tab eventKey="sleep" title="Sleep"> */}
+
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
@@ -135,9 +132,7 @@ export default function EditDaily({
             </select>
           </li>
         </ul>
-        {/* </Tab> */}
 
-        {/* <Tab eventKey="quote" title="Quote"> */}
         <ul style={{ listStyle: "none", padding: 0 }}>
           <li>
             <h4 style={{ marginTop: 40, marginBottom: 20, color: "#3a7e54" }}>
@@ -153,8 +148,6 @@ export default function EditDaily({
             />
           </li>
         </ul>
-        {/* </Tab> */}
-        {/* </Tabs> */}
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose}>

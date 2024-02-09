@@ -10,7 +10,7 @@ export default function DisplayToDo({  setTodos, deleteCompletedTodo }) {
     const todayDate = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
     const todosFromToday = todos.filter(todo => {
-            const createdAtDate = new Date(todo.createdAt);
+            const createdAtDate = new Date(todo.date);
             const createdAtDateOnly = new Date(createdAtDate.getFullYear(), createdAtDate.getMonth(), createdAtDate.getDate());
             return createdAtDateOnly.getTime() === todayDate.getTime();
     });
