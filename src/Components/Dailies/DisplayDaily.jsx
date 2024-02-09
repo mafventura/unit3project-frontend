@@ -48,7 +48,7 @@ export default function DisplayDaily({
         <>
           {objectsFromToday.map((dailyCheck, index) => (
             <Container key={dailyCheck._id} className="d-flex">
-              <p className="p-2">
+              <p className="p-3">
                 <strong>Water:</strong>{" "}
                 {dailyCheck.water === "0.5" ? (
                   <>
@@ -65,7 +65,7 @@ export default function DisplayDaily({
                     💧
                     💧
                     💧
-                    (1.5 litre)
+                    (1.5 litres)
                   </>
                 ) : dailyCheck.water === "2" ? (
                   <>
@@ -73,12 +73,12 @@ export default function DisplayDaily({
                     💧
                     💧
                     💧
-                    (2 litre)
+                    (2 litres)
                   </>
                 ) : null}
               </p>
-              <p className="p-2"><strong>Mood:</strong> {dailyCheck.mood}</p>
-              <p className="p-2">
+              <p className="p-3"><strong>Mood:</strong> {dailyCheck.mood}</p>
+              <p className="p-3">
                 <strong>Sleep:</strong>{" "}
                 {dailyCheck.sleep === "0-4" ? (
                   <>
@@ -105,7 +105,7 @@ export default function DisplayDaily({
                     🌙
                     🌙
 
-                    (more than 8 hours)
+                    (8+ hours)
                   </>
                 ) : null}
               </p>
@@ -118,7 +118,7 @@ export default function DisplayDaily({
                   height: "25px",
                   width: "25px",
                   fontSize: "0.75rem",
-                  marginTop: "8px",
+                  marginTop: "17px",
                 }}
                 onClick={() => {
                   handleShowModal(setEditModal)
@@ -136,7 +136,7 @@ export default function DisplayDaily({
                   height: "25px",
                   width: "25px",
                   fontSize: "0.75rem",
-                  marginTop: "8px",
+                  marginTop: "17px",
                   marginLeft: "5px",
                 }}
                 onClick={() => deleteDaily(dailyCheck._id)}
