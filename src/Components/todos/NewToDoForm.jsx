@@ -65,6 +65,7 @@
 
 import axios from "axios";
 import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function NewToDoForm({ fetchData, user }) {
   const [newToDo, setNewToDo] = useState({
@@ -126,12 +127,12 @@ export default function NewToDoForm({ fetchData, user }) {
           onChange={handleChange}
           required
         /> 
-        <button type="submit"
+        <Button type="submit"
         style={{ backgroundColor: "#3a7e54", borderColor: "#3a7e54",
-         borderRadius:"8px", color: "white", marginLeft: "5px" }}
+          color: "white", marginLeft: "5px" }}
         >
           ADD        
-        </button>
+        </Button>
       </form>
      
     </>
