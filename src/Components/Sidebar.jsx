@@ -6,11 +6,12 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from "cdbreact";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { CiLogout } from "react-icons/ci";
 
 export default function Sidebar({ handleLogout, user }) {
+  const location = useLocation();
   return (
     <div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
       <CDBSidebar textColor="#F4F4F1" backgroundColor="#3C7D54">
@@ -35,20 +36,20 @@ export default function Sidebar({ handleLogout, user }) {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink to="/">
+            <NavLink to="/" className={location.pathname === '/' ? 'active' : ''}  >
               <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/dailies">
+            <NavLink to="/dailies" className={location.pathname === '/dailies' ? 'active' : ''}>
               <CDBSidebarMenuItem icon="calendar-plus">
                 All Daily's
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/todos">
+            <NavLink to="/todos" className={location.pathname === '/todos' ? 'active' : ''}>
               <CDBSidebarMenuItem icon="calendar-check">
                 All To Do's
               </CDBSidebarMenuItem>
             </NavLink>
-            <NavLink>
+            <NavLink to="/schedule" activeClassName="active">
               <CDBSidebarMenuItem icon="calendar-week">
                 Schedule
               </CDBSidebarMenuItem>

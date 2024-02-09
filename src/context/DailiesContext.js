@@ -52,7 +52,6 @@ export function DailiesProvider({ children }) {
 
   const fetchQuicksData = useCallback(async () => {
     try {
-      // console.log("this is", user);
       const response = await axios.get(
         `${process.env.REACT_APP_BACKEND_URL}/dailies`,
         {
@@ -64,7 +63,6 @@ export function DailiesProvider({ children }) {
       );
       const result = response.data;
       setQuicks(result);
-      // console.log(quicks);
     } catch (e) {
       console.error(e);
     }

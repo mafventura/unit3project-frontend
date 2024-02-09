@@ -5,7 +5,7 @@ import Sidebar from "./Components/Sidebar";
 import YearsAndMonthToDos from "./Components/todos/YearsAndMonthToDos";
 import "./App.css";
 import Home from "./Home";
-import AllDailies from "./Components/Dailies/AllDailies";
+import YearsAndMonthDailies from "./Components/Dailies/YearsAndMonthDailies";
 import { useUser } from "./context/UserContext";
 import { useToDos } from "./context/ToDosContext";
 import { useDailies } from "./context/DailiesContext";
@@ -30,13 +30,13 @@ function App() {
             <Route
               path="/todos"
               element={
-                <YearsAndMonthToDos fetchData={fetchData} todos={todos} />
+                <YearsAndMonthToDos/>
               }
             />
             <Route
               path="/dailies"
               element={
-                <AllDailies fetchQuicksData={fetchQuicksData} quicks={quicks} />
+                <YearsAndMonthDailies fetchQuicksData={fetchQuicksData} quicks={quicks} />
               }
             />
             <Route

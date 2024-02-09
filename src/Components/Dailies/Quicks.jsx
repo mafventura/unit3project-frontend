@@ -55,10 +55,10 @@ const Quicks = ({
               style={{ borderRadius: "8px", padding: "5px" }}
             >
               <option value="">Select an option</option>
-              <option value="0.5">💧</option>
-              <option value="1">💧💧</option>
-              <option value="1.5">💧💧💧</option>
-              <option value="2">💧💧💧💧</option>
+              <option value="0.5">💧 (0.5 litre)</option>
+              <option value="1">💧💧 (1 litre)</option>
+              <option value="1.5">💧💧💧 (1.5 litres)</option>
+              <option value="2">💧💧💧💧 (2litres)</option>
             </select>
           </li>
         </ul>
@@ -94,10 +94,10 @@ const Quicks = ({
               style={{ borderRadius: "8px", padding: "5px" }}
             >
               <option value="">Select an option</option>
-              <option value="0-4">🌙</option>
-              <option value="4-6">🌙🌙</option>
-              <option value="6-8">🌙🌙🌙</option>
-              <option value="8+">🌙🌙🌙🌙</option>
+              <option value="0-4">🌙 (0-4 hrs)</option>
+              <option value="4-6">🌙🌙 (4-6 hrs)</option>
+              <option value="6-8">🌙🌙🌙 (6-8 hrs)</option>
+              <option value="8+">🌙🌙🌙🌙 (8+ hrs)</option>
             </select>
           </li>
         </ul>
