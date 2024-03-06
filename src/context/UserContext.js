@@ -10,12 +10,11 @@ export function useUser() {
 export function UsersProvider({ children }) {
   const [user, setUser] = useState(null);
 
-  const googleAuth = useCallback(() => {
-    const result = window.open(
+  const googleAuth = useCallback( () => {
+    window.open(
       `${process.env.REACT_APP_AUTH_URL}/auth/google/callback`,
       '_self',
   )
-  console.log("RESULT", result);
   }, []);
 
   async function getUser() {
