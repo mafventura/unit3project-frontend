@@ -7,7 +7,7 @@ This was a MERN project. For this project, we decided to build a web application
 
 ## Deployment
 
-The app has been deployed and is available [here](https://playpal-mevn-frontend.netlify.app/).
+The app has been deployed and is available [here](https://journee.site/).
 
 ## Getting started
 
@@ -15,11 +15,11 @@ This project is separated into two repos, frontend and [backend](https://github.
 
 1. Access the source code via the 'Clone or download' button 
 2. In CLI, run `npm i` on the root level to install dependencies
-3. Run `npm run dev` to run the program in your local environment
+3. Run `npm start` to run the program in your local environment
 
 
 ## Goal and timeframe:
-This was a solo project and was to be completed in a week.
+This was a group project (collaboration with Evylina Antao and Patrick Quayle) and we had a week to code it.
 
 
 ## Technologies used:
@@ -27,119 +27,232 @@ This was a solo project and was to be completed in a week.
 * Express.js
 * Node.js
 * JavaScript
+* React.js
+* HTML
+* CSS
+* Axios
+* GitHub
+* bcrypt
+* google-auth-library
+* mongoose
+* react-bootstrap
+* cdbreact
+* jsonwebtoken
+* jwt-decode
+* react-datepicker
+* react-icons
+* react-router-dom
 
 
 ## Brief:
-☐ **Have at least 2 data entities (data resources) in addition to the `User` Model** - one entity that represents the main functional idea for your app and another with a **One:Many** or **Many:Many** relationship with that main entity (embedded or referenced).
-☐ **Use OAuth authentication**.
-☐ Implement basic **authorization** that restricts access to features that need a logged in user in order to work (typically CUD data operations) by "protecting" those routes from anonymous users using the `ensureLoggedIn` middleware from the OAuth lesson. In addition, ensure that editing and deletion of a data resource can only be done by the user that created that data (this is done in the controller - refer to the Guide to User-Centric CRUD).
-☐ Have **full-CRUD data operations** somewhere within the app's features. For example, you can have functionality that **C**reates & **U**pdates a _post_ and satisfy **D**elete functionality by implementing the ability to delete _comments_.
-☐ Be styled such that the app looks and feels similar to apps we use on a daily basis - in other words, **it should have a consistent and polished user interface.**
-☐ Be **deployed online**
+☐ A **working** full-stack, single-page application hosted on Heroku.
+
+☐ Incorporate the technologies of the **MERN-stack**:
+
+- MongoDB/Mongoose
+- Express
+- React
+- Node
+
+☐ **Have a well-styled interactive front-end**.
+
+☐ Communicates with the **Express** backend via AJAX.
+
+☐ Implement token-based **authentication**.  Including the ability of a user to sign-up, log in & log out.
+
+☐ Implement **authorization** by restricting CUD data functionality to authenticated users. Also, navigation should respond to the login status of the user.
+
+☐ **Have a well-scoped feature-set**. Full-CRUD data operations are not required if one or more other features are included, for example:
+	
+- Consume data from a third-party API.
+- Implement additional functionality if the user is an admin.
+- Implementation of a highly dynamic UI or data visualization.
+- Other, instructor approved, complexity/features.
+
 
 
 ## Planning:
-Started by making an ERD to sort out the models I would need and how they connect to each other, also made a visual guidance to how I thought the navigation through the application should go.
+We based our initial project on this daily planner page. And decide to have three components that the users could log:
+Daily Check (water intake, sleep, mood and quote of the day)
+To-Dos
+Schedule
 
-![erd-screenshot](https://i.imgur.com/y9bwE7s.png)
+After some initial planning on how we wanted the visuals to look and the colour scheme, we started coding.
 
-![planning-screenshot](https://i.imgur.com/jasx8ap.png)
+![planning-screenshot](https://i.imgur.com/JIF9uJ8.png)
 
 
 ## Process
-- Initial Setup of frontend and backend folders and respective repos.
-- Created the endpoints on the backend
-- Fixed some issues on the backend (mostly details that I missed when copying code from one endpoint to another)
-- Organised some of the basic skeletons for the frontend
-- Added the first couple of frontend pages(just the GET and POST, still missing EDIT and DELETE) and styling.
-- Worked with Bootstrap to find the styling the app would follow and apply to the functioning pages.
-- Added the Delete functions to the pages
+We started by separating the components by the 3 of us, where I was in charge of the scheduling. Because of some family emergency happening this week, immediately on day one, initially I dropped that component and focused on helping Patrick with the Daily Check CRUD and was in charge of the styling.
+
+I built the Edit, and Delete functions for the Daily Checks, both on the frontend and backend.
+
+For the styling, I used the CDBReact:
+
 ```javascript
-async function deleteGame(gameId) {
-   try {
-       await fetch(`${import.meta.env.VITE_API_URL}/games/${gameId}`, {
-           method: 'DELETE',
-           headers: {
-               'Content-Type': 'application/json',
-               'User-Email': userEmail.value
-           }
+<div style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}>
+     <CDBSidebar textColor="#F4F4F1" backgroundColor="#3C7D54">
+       <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+         <div style={{display: 'flex', flexDirection: 'column', alignItems: 'start'}}>
+           <Link to='/'>
+           <img
+             src={"https://i.imgur.com/oVyooXT.png"}
+             alt=""
+             style={{ width: "150px" }}
+             className="mb-2"
+           />
+           </Link>
+           <p
+             style={{
+               color: "#F4F4F1",
+               margin: "5px 0 0",
+               fontFamily: "PT Serif, serif",
+             }}
+           >
+             Hello, {user?.given_name}
+           </p>
+         </div>
+       </CDBSidebarHeader>
 
 
-       })
-       alert('Game Deleted')
-       fetchData()
-
-
-   } catch (error) {
-       console.error('Error deleting game:', error)
-   }
-}
+       <CDBSidebarContent className="sidebar-content">
+         <CDBSidebarMenu>
+           <NavLink to="/"  >
+             <CDBSidebarMenuItem icon="home">Home</CDBSidebarMenuItem>
+           </NavLink>
+           <NavLink to="/dailies">
+             <CDBSidebarMenuItem icon="calendar-plus">
+               All Daily's
+             </CDBSidebarMenuItem>
+           </NavLink>
+           <NavLink to="/todos">
+             <CDBSidebarMenuItem icon="calendar-check">
+               All To Do's
+             </CDBSidebarMenuItem>
+           </NavLink>
+           <NavLink to="/schedule">
+             <CDBSidebarMenuItem icon="calendar-week">
+               Schedule
+             </CDBSidebarMenuItem>
+           </NavLink>
+         </CDBSidebarMenu>
+       </CDBSidebarContent>
+       <CDBSidebarFooter style={{ textAlign: "center" }}>
+         <div className="sidebar-btn-wrapper">
+           <Button
+             variant="secondary"
+             onClick={handleLogout}
+             style={{
+               width: "100%",
+               background: "rgb(233, 237, 200, 0.2)",
+               border: "none",
+               borderRadius: "0",
+             }}
+           >
+             <CiLogout style={{ marginRight: "5px" }} />
+           </Button>
+         </div>
+       </CDBSidebarFooter>
+     </CDBSidebar>
+   </div>
 ```
-with the Delete method and sending the correct headers I was able to achieve this functionality, I then have an alert pop up for the user to know it was successful and fetch the data again so the new list of games is shown,
+We had some trouble adjusting to working with Github as collaborators, with the pull requests and different branches, but eventually got the hang of it. 
 
-- Created the oAuth with Google
-- Added the relationships to the user so every user has their own set of Games and Players. For this, I started by adding user to all other models Schemas. I then tied the CRUD to the user.email like in this example:
+By day 4 we were feeling confident that the project was getting on track so I decided to bring back the schedule component and code it!
+
+Started by, following what had been done, creating the modal for it. I then added the CRUD on the back end
+
 ```javascript
-// Players - Show All Players
-app.get('/players', async (req, res) => {
-   const userEmail = req.headers['user-email']
-   const user = await User.findOne({ 'userEmail': userEmail })
-   const players = await Player.find({ }).sort('playerName')
-   const playersfiltered = players.filter((player) => {
-       console.log(player);
-       return player.user.equals(user._id)
-   })
-   res.json(playersfiltered)
+app.get("/schedules", async (req, res) => {
+ try {
+   const userEmail = req.header("user-email");
+   const user = await User.findOne({ email: userEmail });
+   if (user) {
+     const allSchedules = await Schedule.find({ userId: user._id });
+     res.json(allSchedules);
+   } else {
+     console.log("Not found");
+     res.status(500).json({ message: "User not found" });
+   }
+ } catch (e) {
+   console.error(e);
+   res.status(500).json({ message: "Internal server error" });
+ }
+});
+
+
+app.post("/schedules/add", async (req, res) => {
+ try {
+   const userEmail = req.header("user-email");
+   const user = await User.findOne({ email: userEmail });
+   if (user) {
+     const schedule = req.body;
+     const newSchedule = new Schedule({
+       date: schedule.date,
+       time: schedule.time,
+       event: schedule.event,
+       userId: user._id,
+     });
+     await newSchedule.save();
+     console.log(newSchedule);
+     res.sendStatus(200);
+   } else {
+     console.log("Not found");
+     res.status(500).json({ message: "User not found" });
+   }
+ } catch (e) {
+   console.error(e);
+   res.status(500).json({ message: "Internal server error" });
+ }
+});
+
+
+app.delete('/schedules/:id', async(req, res) => {
+ try {
+   await Schedule.deleteOne({_id: req.params.id})
+   console.log("<------------schedule deleted----------");
+   res.sendStatus(200);
+ } catch (e) {
+   console.error(e);
+   res.status(500).json({ message: "Internal server error" });
+ }
 })
 
-```
-On the front end I had to decode the token in the cookies get the user email value, and fetch the data associated with the email, like this:
-```javascript
-function checkSession() {
-       if (cookies.isKey('user_session')) {
-           const user = decodeCredential(cookies.get('user_session'))
-           userEmail.value = user.email
-       }
-   }
 
-
-async function fetchData() {
-   try {
-       const response = await fetch(`${import.meta.env.VITE_API_URL}/games`, {
-           method: 'GET',
-           headers: {
-               'Content-Type': 'application/json',
-               'User-Email': userEmail.value
-           }
-       })
-       const result = await response.json()
-       gamesBackEnd.value = result
-   } catch (error) {
-       console.error('Error fetching data:', error)
-   }
-}
+app.put("/schedules/:id", async (req, res) => {
+ try {
+   const schedule = req.body;
+   await Schedule.updateOne(
+     { _id: req.params.id },
+     {
+       date: schedule.date,
+       time: schedule.time,
+       event: schedule.event
+     }
+   );
+   res.sendStatus(200);
+   console.log("updated schedule------------->");
+ } catch (e) {
+   console.error(e);
+   res.status(500).json({ message: "Internal server error" });
 ```
-- Added the Edit functionality to the Players
-- Fixed the bug of the Player Names not showing in the logs
-- Prepped everything to then deploy with Netlify
+Connect them to the frontend through a Context file. Finally, following our project structure, I made the pages necessary to display all the schedules added before, separated by year, month and day.
+
 
 
 ### Challenges
-The most challenging part was creating the relationship with the user. I had to try a couple of different approaches (for params or middleware) and ended up structuring it by getting information from the headers. I then had to adapt everything with the code and schemes to follow this structure.
-
-Also had some trouble with fetching the information from the players' database, it was not showing properly on some of the pages and it took a while to find a fix for it.
+It was a challenge to adapt to working with collaborators. It was hard to manage all the pull requests and to keep everyone of the main and develop branches. 
+But for me, the biggest challenge in this project was time, we already had a tight schedule of building these projects in a few days, and not being able to be present for big chunks of time made it harder to develop everything we were aiming for.
 
 ### Wins
-The biggest win for me was when I saw the final product, especially when I started adding styling with Bootstrap and was able to find a theme that started to seem like an actual web application.
+I consider that there were 2 major wins in this project: The first one I believe was a group one, we made a great team, everyone was able to pitch in and in our disorganization, we were able to be very organised. We kept to a routine of checking GitHub and the pull requests 2 to 3 times a day, to "try" (big keyword here) to avoid conflicts.
+The second major win was a personal one, in the first couple of days I did not believe I was going to be able to finish my part of the project due to the time constricts. But seeing it done, it tasted like a great win!
 
 ## Key learnings
-I feel more comfortable with creating the CRUDS in the backend at the moment, I felt like we didn’t have the same preparation for the frontend but I find the challenge very interesting and loved to learn it. I feel a bit more comfortable with it now, but still, very brand new.
-
-Also, the structuring of the project. I believe I learnt some lessons on what to do or not with the next one, like the creation and deletion of HTML dynamic elements, it can get tricky sometimes.
+I believe the major key learning was working in a group environment with GitHub which was not easy. I furthered my knowledge with styling and Bootstrap as well, trying and experimenting with a lot of dependencies and seeing what was possible. 
 
 ## Known errors or bugs
-* To my knowledge, as of now, there are no bugs with the web application.
-
+* Editing the Daily Checks sometimes doesn't work properly, resetting some of the fields on its own
 
 ## Future improvements
-* Future improvements are to add edit functions to the games and logs and I would also love to add a Statistic view where you can add some graphics relating to the logs.
+* Adding the edit function to the schedules section of the project
