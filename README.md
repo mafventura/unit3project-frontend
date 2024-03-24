@@ -11,7 +11,7 @@ The app has been deployed and is available [here](https://journee.site/).
 
 ## Getting started
 
-This project is separated into two repos, frontend and [backend](https://github.com/mafventura/unit3project-backend)). 
+This project is separated into two repos, frontend and [backend](https://github.com/mafventura/unit3project-backend). 
 
 1. Access the source code via the 'Clone or download' button 
 2. In CLI, run `npm i` on the root level to install dependencies
